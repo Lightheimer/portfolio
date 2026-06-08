@@ -1,8 +1,9 @@
 "use client";
 
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 type Project = {
   slug: string;
@@ -57,10 +58,60 @@ const PROJECTS: Project[] = [
 ];
 
 export function SelectedWork() {
-  const reduce = useReducedMotion();
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const root_ = root.current;
+      if (!root_) return;
+
+      // ENTREE des cartes (batch pour grouper)
+      ScrollTrigger.batch(root_.querySelectorAll<HTMLElement>(".sw-card"), {
+        start: "top 85%",
+        once: true,
+        onEnter: (els) => {
+          if (reduce) {
+            gsap.set(els, { autoAlpha: 1, y: 0 });
+            return;
+          }
+          gsap.from(els, {
+            autoAlpha: 0,
+            y: 60,
+            duration: 1.1,
+            stagger: 0.12,
+            ease: "expo.out",
+          });
+        },
+      });
+
+      // PARALLAX subtil sur chaque image (scrub)
+      if (!reduce) {
+        root_.querySelectorAll<HTMLElement>(".sw-img").forEach((img) => {
+          gsap.fromTo(
+            img,
+            { yPercent: -8, scale: 1.12 },
+            {
+              yPercent: 8,
+              scale: 1.12,
+              ease: "none",
+              scrollTrigger: {
+                trigger: img.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            },
+          );
+        });
+      }
+    },
+    { scope: root as React.RefObject<HTMLElement> },
+  );
 
   return (
     <section
+      ref={root}
       aria-label="Travail selectionne"
       className="mx-auto max-w-350 px-6 sm:px-10 py-28 md:py-40"
     >
@@ -86,27 +137,20 @@ export function SelectedWork() {
         </div>
       </header>
 
-      {/* Feature project — full bleed */}
-      <FeatureCard project={PROJECTS[0]} reduce={!!reduce} />
+      <FeatureCard project={PROJECTS[0]} />
 
-      {/* 2-up grid for projects 2 & 3 */}
       <div className="grid md:grid-cols-2 gap-8 md:gap-12 mt-12 md:mt-20">
-        {PROJECTS.slice(1).map((p, i) => (
-          <HalfCard key={p.slug} project={p} delay={i * 0.1} reduce={!!reduce} />
+        {PROJECTS.slice(1).map((p) => (
+          <HalfCard key={p.slug} project={p} />
         ))}
       </div>
     </section>
   );
 }
 
-function FeatureCard({ project, reduce }: { project: Project; reduce: boolean }) {
+function FeatureCard({ project }: { project: Project }) {
   return (
-    <motion.article
-      initial={reduce ? false : { opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <article className="sw-card">
       <Link href={project.slug} className="group block">
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-bone">
           <Image
@@ -114,10 +158,10 @@ function FeatureCard({ project, reduce }: { project: Project; reduce: boolean })
             alt={project.alt}
             fill
             sizes="(min-width: 1024px) 1400px, 100vw"
-            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+            className="sw-img object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.16]"
             priority
           />
-          <span className="absolute top-5 left-5 px-3 py-1 bg-paper text-foreground text-[11px] tracking-[0.18em] uppercase">
+          <span className="absolute top-5 left-5 z-10 px-3 py-1 bg-paper text-foreground text-[11px] tracking-[0.18em] uppercase">
             Feature
           </span>
         </div>
@@ -143,26 +187,13 @@ function FeatureCard({ project, reduce }: { project: Project; reduce: boolean })
           </div>
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }
 
-function HalfCard({
-  project,
-  delay,
-  reduce,
-}: {
-  project: Project;
-  delay: number;
-  reduce: boolean;
-}) {
+function HalfCard({ project }: { project: Project }) {
   return (
-    <motion.article
-      initial={reduce ? false : { opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <article className="sw-card">
       <Link href={project.slug} className="group block">
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-bone">
           <Image
@@ -170,7 +201,7 @@ function HalfCard({
             alt={project.alt}
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+            className="sw-img object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.16]"
           />
         </div>
 
@@ -193,6 +224,6 @@ function HalfCard({
           {project.year}. {project.stack}.
         </p>
       </Link>
-    </motion.article>
+    </article>
   );
 }
