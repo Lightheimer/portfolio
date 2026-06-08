@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Sources lourdes (tarballs téléchargés manuellement)
+Analyse/sources/tarballs/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
