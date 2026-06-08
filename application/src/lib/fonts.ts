@@ -1,22 +1,23 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 
 /**
- * Fraunces — serif éditorial variable.
- * Utilisée pour le display.
+ * Playfair Display, serif haute-couture.
+ * Justification : portfolio editorial / luxury-heritage (rotation hors Fraunces banni).
+ * Italic et regular dans la meme famille pour les emphasises.
  */
-export const fraunces = Fraunces({
+export const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-fraunces",
-  axes: ["opsz"],
+  variable: "--font-display",
+  weight: ["400", "500", "700", "900"],
+  style: ["normal", "italic"],
 });
 
 /**
- * Inter — sans-serif technique.
- * Utilisée pour le corps, la nav, le micro-typo.
+ * Geist Sans, neutre technique (Vercel official).
+ * Remplace Inter (LLM default discouraged).
  */
-export const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
+export const geist = GeistSans;
+export const geistMono = GeistMono;

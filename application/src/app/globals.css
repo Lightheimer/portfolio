@@ -1,52 +1,35 @@
 @import "tailwindcss";
 
 /* ----------------------------------------------------------------------------
- * Portfolio Junior Samuel KOUDJI — Tokens
- * Direction artistique : Serenity / Cartier (palette canon chaude)
- * Référence dogme : /memories/serenity-design-principles.md
+ * Portfolio Junior Samuel KOUDJI
+ * Direction artistique : Cartier (palette ivory + ink + rouge Cartier)
+ * Anti-slop : rotation hors Fraunces, accent unique, photos massives
  * -------------------------------------------------------------------------- */
 
 @theme {
-  /* Palette canon chaude — ivoire / noir / doré / cendre */
-  --color-ivory: #f8f6f1;
-  --color-ink: #0a0a0a;
-  --color-gold: #b8935a;
-  --color-ash: #e8e4dc;
+  /* Palette Cartier-inspired */
+  --color-paper: #fafaf8;
+  --color-ink: #0c0c0c;
+  --color-rouge: #c8102e;
+  --color-bone: #e8e4dc;
+  --color-paper-soft: #f3f1ec;
 
-  /* Surfaces dérivées (utilisées sobrement) */
-  --color-ash-soft: #f1ede5;
-  --color-ink-soft: #1a1a1a;
-
-  /* Sémantiques light-first */
-  --color-background: var(--color-ivory);
+  /* Semantiques light-first */
+  --color-background: var(--color-paper);
   --color-foreground: var(--color-ink);
-  --color-muted: #6b6760;
-  --color-hairline: rgb(10 10 10 / 0.08);
-  --color-accent: var(--color-gold);
+  --color-muted: #6b6766;
+  --color-hairline: rgb(12 12 12 / 0.08);
+  --color-accent: var(--color-rouge);
 
-  /* Polices — chargées via next/font (variables --font-inter / --font-fraunces sur <html>) */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  /* Polices */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, Cambria, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+  --font-display: var(--font-display), ui-serif, Georgia, Cambria, serif;
 
-  /* Ombres soft longues (dogme) */
-  --shadow-soft: 0 24px 48px rgb(10 10 10 / 0.06);
+  --shadow-soft: 0 24px 48px rgb(12 12 12 / 0.06);
+  --shadow-rouge: 0 8px 32px rgb(200 16 46 / 0.18);
 }
-
-/* ----------------------------------------------------------------------------
- * Dark mode optionnel — discret. Activé via [data-theme="dark"] sur <html>.
- * -------------------------------------------------------------------------- */
-
-[data-theme="dark"] {
-  --color-background: var(--color-ink);
-  --color-foreground: var(--color-ivory);
-  --color-muted: #a8a39a;
-  --color-hairline: rgb(248 246 241 / 0.08);
-}
-
-/* ----------------------------------------------------------------------------
- * Reset et base
- * -------------------------------------------------------------------------- */
 
 html {
   font-family: var(--font-sans);
@@ -55,7 +38,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: "ss01", "cv11";
 }
 
 body {
@@ -65,55 +47,66 @@ body {
 }
 
 ::selection {
-  background: var(--color-ink);
-  color: var(--color-ivory);
+  background: var(--color-rouge);
+  color: var(--color-paper);
 }
 
-[data-theme="dark"] ::selection {
-  background: var(--color-ivory);
-  color: var(--color-ink);
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-/* Liens neutres : la couleur n'est pas sémantique chez nous, c'est l'underline qui parle */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Typo display — réservée aux titres principaux */
 .display {
-  font-family: var(--font-serif);
+  font-family: var(--font-display);
   font-weight: 400;
-  font-variation-settings: "opsz" 144;
-  letter-spacing: -0.03em;
-  line-height: 0.92;
+  letter-spacing: -0.025em;
+  line-height: 0.96;
 }
 
-/* Micro-typo (uppercase espacée) — meta, nav, eyebrow */
-.micro {
-  font-family: var(--font-sans);
-  font-size: 0.6875rem; /* 11px */
+.display em,
+.display .it {
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.1;
+  padding-bottom: 0.05em;
+  display: inline-block;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--color-muted);
 }
 
-/* Lead paragraphique — contre-partie du display */
 .lead {
-  font-size: 1.1875rem; /* 19px */
+  font-size: 1.1875rem;
   line-height: 1.55;
   max-width: 36rem;
+  color: var(--color-foreground);
 }
 
-/* Hairline 1px @ 8 % opacité — séparateur sobre */
 .hairline {
   border: 0;
   height: 1px;
   background: var(--color-hairline);
 }
 
-/* Numbers — tabular nums sur les chiffres porteurs de sens */
 .tnum {
   font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
