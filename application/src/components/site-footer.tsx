@@ -57,9 +57,9 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-hairline flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="mt-16 sm:mt-20 pt-8 border-t border-hairline flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="eyebrow tnum">© {year} Junior Samuel Koudji</p>
-          <p className="eyebrow">Tous droits reserves.</p>
+          <p className="eyebrow">Tous droits réservés.</p>
         </div>
       </div>
     </footer>

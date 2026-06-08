@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
+import { type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { motion, useReducedMotion } from "motion/react";
+import { GfaPanel } from "@/components/home/gfa-panel";
 
 type Project = {
   slug: string;
@@ -13,112 +14,61 @@ type Project = {
   context: string;
   year: string;
   stack: string;
-  image: string;
-  alt: string;
+  image?: string;
+  alt?: string;
+  render?: ReactNode;
   span: "feature" | "half";
 };
 
 const PROJECTS: Project[] = [
   {
-    slug: "/work/pikarre",
+    slug: "https://github.com/Lightheimer",
     index: "01",
-    title: "PIKARRE",
-    subtitle: "Plateforme e-commerce sur-mesure",
-    context: "Marque togolaise de pret-a-porter",
+    title: "PIKARRE Apart",
+    subtitle: "Location premium d'appartements",
+    context: "Marque d'hospitalite urbaine, Lome",
     year: "2025",
-    stack: "Laravel . Livewire . Stripe",
-    image: "https://picsum.photos/seed/pikarre-fashion-textile/1600/1100",
-    alt: "Etoffes textile, palette terre",
+    stack: "Laravel . Livewire . SQLite",
+    image: "/work/pikarre.jpg",
+    alt: "Hero PIKARRE Apart, location premium a Lome",
     span: "feature",
   },
   {
-    slug: "/work/gfa",
+    slug: "https://github.com/Lightheimer/GFA-PROJECT",
     index: "02",
     title: "GFA",
-    subtitle: "Suite de gestion documentaire",
-    context: "Gestion administrative continentale",
+    subtitle: "Gestion de flux . Assemblee nationale",
+    context: "Institution publique, suivi documentaire",
     year: "2024",
-    stack: "Spring Boot . PostgreSQL",
-    image: "https://picsum.photos/seed/gfa-doc-archives-paper/1200/1500",
-    alt: "Archives documentaires, ton ivoire",
+    stack: "Laravel . Spring Boot . PostgreSQL",
+    render: <GfaPanel />,
     span: "half",
   },
   {
-    slug: "/work/cbc",
+    slug: "https://github.com/Lightheimer",
     index: "03",
     title: "CBC",
-    subtitle: "Catholic Basketball Club. Lome.",
+    subtitle: "Catholic Basketball Club . Lome",
     context: "Identite, app club, comptabilite",
     year: "2026",
-    stack: "Next.js 16 . Supabase . Prisma",
-    image: "https://picsum.photos/seed/cbc-basketball-court-night/1200/1500",
-    alt: "Terrain de basket nocturne",
+    stack: "Next.js 16 . Supabase . Prisma 7",
+    image: "/work/cbc.jpg",
+    alt: "Accueil CBC, street basketball club a Lome",
     span: "half",
   },
 ];
 
 export function SelectedWork() {
-  const root = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const root_ = root.current;
-      if (!root_) return;
-
-      // ENTREE des cartes (batch pour grouper)
-      ScrollTrigger.batch(root_.querySelectorAll<HTMLElement>(".sw-card"), {
-        start: "top 85%",
-        once: true,
-        onEnter: (els) => {
-          if (reduce) {
-            gsap.set(els, { autoAlpha: 1, y: 0 });
-            return;
-          }
-          gsap.from(els, {
-            autoAlpha: 0,
-            y: 60,
-            duration: 1.1,
-            stagger: 0.12,
-            ease: "expo.out",
-          });
-        },
-      });
-
-      // PARALLAX subtil sur chaque image (scrub)
-      if (!reduce) {
-        root_.querySelectorAll<HTMLElement>(".sw-img").forEach((img) => {
-          gsap.fromTo(
-            img,
-            { yPercent: -8, scale: 1.12 },
-            {
-              yPercent: 8,
-              scale: 1.12,
-              ease: "none",
-              scrollTrigger: {
-                trigger: img.parentElement,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: true,
-              },
-            },
-          );
-        });
-      }
-    },
-    { scope: root as React.RefObject<HTMLElement> },
-  );
-
   return (
     <section
-      ref={root}
+      id="work"
       aria-label="Travail selectionne"
-      className="mx-auto max-w-350 px-6 sm:px-10 py-28 md:py-40"
+      className="mx-auto max-w-350 px-6 sm:px-10 py-24 sm:py-28 md:py-40 scroll-mt-24"
     >
-      <header className="mb-16 md:mb-24 grid grid-cols-12 gap-6 items-end">
+      <header className="mb-14 sm:mb-16 md:mb-24 grid grid-cols-12 gap-6 items-end">
         <div className="col-span-12 md:col-span-8">
           <p className="eyebrow mb-5">03 / Selection</p>
-          <h2 className="display text-5xl md:text-7xl lg:text-8xl">
+          <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)]">
             Une selection.
             <br />
             <em>Un seul atelier.</em>
@@ -126,10 +76,12 @@ export function SelectedWork() {
         </div>
         <div className="hidden md:flex col-span-4 justify-end items-end pb-2">
           <Link
-            href="/work"
+            href="https://github.com/Lightheimer"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] font-medium border-b border-foreground pb-1 hover:text-rouge hover:border-rouge transition-colors"
           >
-            Index complet
+            Voir sur GitHub
             <span aria-hidden className="transition-transform group-hover:translate-x-1.5">
               {"\u2192"}
             </span>
@@ -137,32 +89,70 @@ export function SelectedWork() {
         </div>
       </header>
 
-      <FeatureCard project={PROJECTS[0]} />
+      <FeatureCard project={PROJECTS[0]} index={0} />
 
       <div className="grid md:grid-cols-2 gap-8 md:gap-12 mt-12 md:mt-20">
-        {PROJECTS.slice(1).map((p) => (
-          <HalfCard key={p.slug} project={p} />
+        {PROJECTS.slice(1).map((p, i) => (
+          <HalfCard key={p.slug + p.title} project={p} index={i + 1} />
         ))}
       </div>
     </section>
   );
 }
 
-function FeatureCard({ project }: { project: Project }) {
+function FeatureCard({ project, index }: { project: Project; index: number }) {
+  const reduce = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const external = project.slug.startsWith("http");
   return (
-    <article className="sw-card">
-      <Link href={project.slug} className="group block">
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-bone">
-          <Image
-            src={project.image}
-            alt={project.alt}
-            fill
-            sizes="(min-width: 1024px) 1400px, 100vw"
-            className="sw-img object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.16]"
-            priority
-          />
+    <motion.article
+      initial={reduce ? false : { opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 1.1, delay: index * 0.12, ease }}
+    >
+      <Link
+        href={project.slug}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="group block"
+      >
+        <div
+          className="relative aspect-16/10 w-full overflow-hidden bg-bone"
+          style={{ containerType: "size" }}
+        >
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.alt ?? project.title}
+              fill
+              sizes="(min-width: 1024px) 1400px, 100vw"
+              className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
+              priority
+            />
+          ) : (
+            <div className="absolute inset-0">{project.render}</div>
+          )}
           <span className="absolute top-5 left-5 z-10 px-3 py-1 bg-paper text-foreground text-[11px] tracking-[0.18em] uppercase">
             Feature
+          </span>
+
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          >
+            <span
+              className="font-display italic select-none"
+              style={{
+                fontSize: "clamp(4rem, 14vw, 11rem)",
+                color: "rgba(250,250,248,0.92)",
+                mixBlendMode: "difference",
+                letterSpacing: "-0.04em",
+                lineHeight: 1,
+              }}
+            >
+              {project.title}
+            </span>
           </span>
         </div>
 
@@ -171,7 +161,7 @@ function FeatureCard({ project }: { project: Project }) {
             <p className="eyebrow tnum">N. {project.index}</p>
           </div>
           <div className="col-span-12 md:col-span-7">
-            <h3 className="display text-3xl md:text-5xl">
+            <h3 className="display text-2xl sm:text-3xl md:text-5xl">
               {project.title}.{" "}
               <em className="text-foreground/60">{project.subtitle}</em>
             </h3>
@@ -187,35 +177,74 @@ function FeatureCard({ project }: { project: Project }) {
           </div>
         </div>
       </Link>
-    </article>
+    </motion.article>
   );
 }
 
-function HalfCard({ project }: { project: Project }) {
+function HalfCard({ project, index }: { project: Project; index: number }) {
+  const reduce = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const external = project.slug.startsWith("http");
   return (
-    <article className="sw-card">
-      <Link href={project.slug} className="group block">
-        <div className="relative aspect-[4/5] w-full overflow-hidden bg-bone">
-          <Image
-            src={project.image}
-            alt={project.alt}
-            fill
-            sizes="(min-width: 768px) 50vw, 100vw"
-            className="sw-img object-cover transition-transform duration-1000 ease-out group-hover:scale-[1.16]"
-          />
+    <motion.article
+      initial={reduce ? false : { opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 1.1, delay: index * 0.12, ease }}
+    >
+      <Link
+        href={project.slug}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        className="group block"
+      >
+        <div
+          className="relative aspect-4/5 w-full overflow-hidden bg-bone"
+          style={{ containerType: "size" }}
+        >
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.alt ?? project.title}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
+              loading="eager"
+            />
+          ) : (
+            <div className="absolute inset-0">{project.render}</div>
+          )}
+
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+          >
+            <span
+              className="font-display italic select-none"
+              style={{
+                fontSize: "clamp(3rem, 18cqw, 8rem)",
+                color: "rgba(250,250,248,0.95)",
+                mixBlendMode: "difference",
+                letterSpacing: "-0.04em",
+                lineHeight: 1,
+              }}
+            >
+              {project.title}
+            </span>
+          </span>
         </div>
 
         <div className="mt-5 flex items-baseline justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <p className="eyebrow tnum mb-2">N. {project.index}</p>
             <h3 className="display text-2xl md:text-3xl">{project.title}</h3>
-            <p className="font-display italic text-foreground/60 text-lg mt-1">
+            <p className="font-display italic text-foreground/60 text-base md:text-lg mt-1">
               {project.subtitle}
             </p>
           </div>
           <span
             aria-hidden
-            className="text-[12px] uppercase tracking-[0.18em] font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-rouge"
+            className="shrink-0 text-[12px] uppercase tracking-[0.18em] font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-rouge"
           >
             {"\u2192"}
           </span>
@@ -224,6 +253,6 @@ function HalfCard({ project }: { project: Project }) {
           {project.year}. {project.stack}.
         </p>
       </Link>
-    </article>
+    </motion.article>
   );
 }

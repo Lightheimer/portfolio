@@ -1,20 +1,17 @@
 "use client";
 
 /**
- * Lien magnétique : suit légèrement la souris dans un rayon de 60px.
- * Utilise gsap.quickTo() = 1 seul tween réutilisé (perf).
- * Désactivé en touch + reduced-motion.
+ * Lien magnétique : suit légèrement la souris.
+ * Vanilla — pas de GSAP. Désactivé en touch + reduced-motion.
  */
 
 import Link from "next/link";
-import { useRef, type ReactNode } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useEffect, useRef, type ReactNode } from "react";
 
 type Props = {
   href: string;
   className?: string;
   children: ReactNode;
-  /** Force d'attraction (0-1) */
   strength?: number;
 };
 
@@ -27,49 +24,62 @@ export function MagneticLink({
   const ref = useRef<HTMLAnchorElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 
-  useGSAP(
-    () => {
-      const el = ref.current;
-      const inner = innerRef.current;
-      if (!el || !inner) return;
+  useEffect(() => {
+    const el = ref.current;
+    const inner = innerRef.current;
+    if (!el || !inner) return;
 
-      const reduce =
-        typeof window !== "undefined" &&
-        (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-          window.matchMedia("(hover: none)").matches);
-      if (reduce) return;
+    const reduce =
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(hover: none)").matches;
+    if (reduce) return;
 
-      const xTo = gsap.quickTo(el, "x", { duration: 0.55, ease: "expo.out" });
-      const yTo = gsap.quickTo(el, "y", { duration: 0.55, ease: "expo.out" });
-      const ixTo = gsap.quickTo(inner, "x", { duration: 0.7, ease: "expo.out" });
-      const iyTo = gsap.quickTo(inner, "y", { duration: 0.7, ease: "expo.out" });
+    let raf = 0;
+    let tx = 0,
+      ty = 0,
+      cx = 0,
+      cy = 0,
+      ix = 0,
+      iy = 0,
+      icx = 0,
+      icy = 0;
 
-      const onMove = (e: MouseEvent) => {
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - (r.left + r.width / 2);
-        const y = e.clientY - (r.top + r.height / 2);
-        xTo(x * strength);
-        yTo(y * strength);
-        ixTo(x * strength * 0.5);
-        iyTo(y * strength * 0.5);
-      };
-      const onLeave = () => {
-        xTo(0);
-        yTo(0);
-        ixTo(0);
-        iyTo(0);
-      };
+    const animate = () => {
+      cx += (tx - cx) * 0.15;
+      cy += (ty - cy) * 0.15;
+      icx += (ix - icx) * 0.18;
+      icy += (iy - icy) * 0.18;
+      el.style.transform = `translate3d(${cx.toFixed(2)}px, ${cy.toFixed(2)}px, 0)`;
+      inner.style.transform = `translate3d(${icx.toFixed(2)}px, ${icy.toFixed(2)}px, 0)`;
+      raf = requestAnimationFrame(animate);
+    };
 
-      el.addEventListener("mousemove", onMove);
-      el.addEventListener("mouseleave", onLeave);
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      tx = x * strength;
+      ty = y * strength;
+      ix = x * strength * 0.5;
+      iy = y * strength * 0.5;
+    };
+    const onLeave = () => {
+      tx = 0;
+      ty = 0;
+      ix = 0;
+      iy = 0;
+    };
 
-      return () => {
-        el.removeEventListener("mousemove", onMove);
-        el.removeEventListener("mouseleave", onLeave);
-      };
-    },
-    { scope: ref as React.RefObject<HTMLElement> }
-  );
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+    raf = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
+  }, [strength]);
 
   return (
     <Link
@@ -78,7 +88,7 @@ export function MagneticLink({
       className={className}
       style={{ willChange: "transform", display: "inline-flex" }}
     >
-      <span ref={innerRef} style={{ display: "inline-flex", alignItems: "center", gap: "inherit", willChange: "transform" }}>
+      <span ref={innerRef} className="inline-flex items-center gap-3">
         {children}
       </span>
     </Link>

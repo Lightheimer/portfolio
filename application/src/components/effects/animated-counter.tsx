@@ -1,16 +1,14 @@
 "use client";
 
 /**
- * Compteur animé : tween 0 → value on viewport enter.
- * Format en padStart pour matcher l'esthétique "02", "05" du portfolio.
+ * Compteur animé : tween 0 → value sur viewport enter.
+ * Implémentation vanilla (rAF) — pas de dépendance externe.
  */
 
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   value: number;
-  /** Nombre de chiffres avec leading zero (ex. "05") */
   pad?: number;
   className?: string;
   duration?: number;
@@ -20,49 +18,54 @@ export function AnimatedCounter({
   value,
   pad = 2,
   className = "",
-  duration = 1.6,
+  duration = 1600,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
+  const [current, setCurrent] = useState(0);
+  const [started, setStarted] = useState(false);
 
-  useGSAP(
-    () => {
-      const el = ref.current;
-      if (!el) return;
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
 
-      const reduce =
-        typeof window !== "undefined" &&
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setCurrent(value);
+      return;
+    }
 
-      if (reduce) {
-        el.textContent = String(value).padStart(pad, "0");
-        return;
-      }
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting && !started) {
+            setStarted(true);
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.4 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [value, started]);
 
-      const obj = { n: 0 };
-      gsap.to(obj, {
-        n: value,
-        duration,
-        ease: "expo.out",
-        snap: { n: 1 },
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          once: true,
-        },
-        onUpdate() {
-          el.textContent = String(Math.round(obj.n)).padStart(pad, "0");
-        },
-        onComplete() {
-          el.textContent = String(value).padStart(pad, "0");
-        },
-      });
-    },
-    { scope: ref as React.RefObject<HTMLElement> }
-  );
+  useEffect(() => {
+    if (!started) return;
+    let raf = 0;
+    const start = performance.now();
+    const ease = (t: number) => 1 - Math.pow(1 - t, 4); // expo-out
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      setCurrent(Math.round(ease(p) * value));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [started, value, duration]);
 
   return (
     <span ref={ref} className={className}>
-      {String(value).padStart(pad, "0")}
+      {String(current).padStart(pad, "0")}
     </span>
   );
 }
