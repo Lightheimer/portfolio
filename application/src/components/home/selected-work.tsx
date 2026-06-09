@@ -33,22 +33,23 @@ type Project = {
 
 const PROJECTS: Project[] = [
   {
+    slug: "https://pikarreappart.com",
     index: "01",
     title: "PIKARRE Apart",
-    subtitle: "Location premium d'appartements",
-    context: "Marque d'hospitalite urbaine, Lome",
-    year: "2025",
-    stack: "Laravel . Livewire . SQLite",
+    subtitle: "Location d'appartements . Lome",
+    context: "Plateforme de gestion locative meublee courte / longue duree. Domaine prive, refresh continu en production depuis 2024.",
+    year: "2024",
+    stack: "Laravel . Blade . MySQL",
     status: { label: "En production", tone: "live" },
     image: "/work/pikarre.jpg",
-    alt: "Hero PIKARRE Apart, location premium a Lome",
+    alt: "Hero PIKARRE Apart, location d'appartements a Lome",
   },
   {
     slug: "https://vanelys.infinityfreeapp.com/",
     index: "02",
     title: "Vanelys",
     subtitle: "E-commerce mode . Lome",
-    context: "Boutique en ligne, catalogue, panier, WhatsApp checkout",
+    context: "Boutique en ligne, catalogue, panier, paiement WhatsApp. Hebergement free-tier, demo publique.",
     year: "2026",
     stack: "Laravel . Livewire . MySQL",
     status: { label: "En ligne", tone: "live" },
@@ -59,7 +60,7 @@ const PROJECTS: Project[] = [
     index: "03",
     title: "CBC",
     subtitle: "Catholic Basketball Club . Lome",
-    context: "Identite, app club, comptabilite transparente",
+    context: "Identite, app club, comptabilite transparente, mini-matchs, votes anonymes. Backend complet, front en finition.",
     year: "2026",
     stack: "Next.js 16 . Supabase . Prisma 7",
     status: { label: "En cours", tone: "wip" },
@@ -69,19 +70,19 @@ const PROJECTS: Project[] = [
   {
     index: "04",
     title: "GFA",
-    subtitle: "Plateforme hospitaliere . UNICEF Togo",
-    context: "Stage UNICEF Togo, projet de fin de cycle, soutenance 18/20",
+    subtitle: "Courrier parlementaire . Assemblee Nationale Togo",
+    context: "Plateforme de gestion du courrier de l'Assemblee Nationale Togolaise. Livree pendant le stage UNICEF Togo, en service interne.",
     year: "2025",
-    stack: "Laravel . PHP . PostgreSQL",
-    status: { label: "Soutenu 18/20", tone: "soutenu" },
+    stack: "Laravel . Livewire . MySQL",
+    status: { label: "Livre", tone: "done" },
     image: "/work/gfa-welcome.jpg",
-    alt: "GFA, plateforme hospitaliere realisee a l'UNICEF Togo",
+    alt: "GFA, plateforme de courrier de l'Assemblee Nationale Togolaise",
   },
   {
     index: "05",
     title: "Marlone",
     subtitle: "Atelier mode . Boutique + caisse",
-    context: "POS + e-commerce, gestion stock multi-variantes, demo locale",
+    context: "POS + e-commerce, gestion stock multi-variantes. Demo locale (Laravel + MySQL), non deploye publiquement.",
     year: "2026",
     stack: "Laravel . Livewire . MySQL",
     status: { label: "Livre", tone: "done" },
@@ -328,11 +329,18 @@ function Stage({
         {project.slug ? (
           <span
             aria-hidden
-            className="pointer-events-none absolute top-4 right-4 z-10 px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium bg-paper/95 text-foreground opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
+            className="pointer-events-none absolute top-4 right-4 z-10 px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium bg-paper text-foreground opacity-0 -translate-y-1 group-hover/stage:opacity-100 group-hover/stage:translate-y-0 transition-all duration-500"
           >
             Visiter le projet {"\u2192"}
           </span>
-        ) : null}
+        ) : (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute top-4 right-4 z-10 px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium border border-paper/30 text-paper/70 opacity-0 -translate-y-1 group-hover/stage:opacity-100 group-hover/stage:translate-y-0 transition-all duration-500"
+          >
+            Capture {"\u00b7"} {project.year}
+          </span>
+        )}
       </div>
 
       {/* Petits piliers de scene */}
@@ -403,7 +411,7 @@ function CardShell({
   children: ReactNode;
 }) {
   if (!project.slug) {
-    return <div className="group block">{children}</div>;
+    return <div className="group/stage block">{children}</div>;
   }
   const external = project.slug.startsWith("http");
   return (
@@ -411,7 +419,8 @@ function CardShell({
       href={project.slug}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="group block"
+      className="group/stage block"
+      aria-label={`Ouvrir ${project.title} dans un nouvel onglet`}
     >
       {children}
     </Link>

@@ -13,14 +13,14 @@ export function AboutSection() {
 
   const titleLines = [
     { text: "Software engineer." },
-    { text: "Né à Lomé.", em: true },
-    { text: "Vu plus large." },
+    { text: "Ne a Lome." },
+    { text: "Vu plus large.", em: true },
   ];
 
   const paras = [
-    "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system — chaque projet m'a forme sur le terrain.",
+    "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system \u2014 chaque projet m'a forme sur le terrain.",
     "Ne au Togo, forme sur les contraintes du terrain ouest-africain : reseau intermittent, mobile money, offline-first. Le detail compte quand l'internet ne suit pas.",
-    "Six projets en ligne, dont une plateforme d'hospitalite urbaine, deux e-commerces de mode, une suite documentaire pour une institution publique et un club sportif. Tout est concu pour tenir des annees — pas un trimestre.",
+    "Trois produits en ligne (PIKARRE Apart, Vanelys, CBC en finition), une plateforme institutionnelle livree pour l'Assemblee Nationale Togolaise pendant le stage UNICEF, plus une boutique POS en demo. Tout est concu pour tenir des annees \u2014 pas un trimestre.",
     "Aujourd'hui : disponible a Paris des octobre 2026 pour rejoindre une equipe produit ambitieuse en alternance. Lome. Paris.",
   ];
 
@@ -76,6 +76,34 @@ export function AboutSection() {
               </span>
             ))}
           </motion.h2>
+
+          {/* Mobile-only portrait, just under the title */}
+          <motion.div
+            className="mt-8 md:hidden relative w-full aspect-4/5 max-w-72 overflow-hidden bg-ink"
+            initial={reduce ? false : { opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: "some" }}
+            transition={{ duration: 1.2, delay: 0.1, ease }}
+          >
+            <Image
+              src="/profile.jpg"
+              alt="Portrait Junior Samuel Koudji"
+              fill
+              sizes="(min-width: 768px) 288px, 60vw"
+              className="object-cover object-center"
+              style={{ filter: "grayscale(100%) contrast(1.05) brightness(0.95)" }}
+            />
+            <span
+              aria-hidden
+              className="absolute inset-0 bg-linear-to-t from-ink/40 via-transparent to-transparent"
+            />
+            <span className="absolute top-3 left-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/70">
+              Portrait
+            </span>
+            <span className="absolute bottom-3 right-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/70 tnum">
+              JK / 2026
+            </span>
+          </motion.div>
 
           <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 gap-x-10 gap-y-6 max-w-3xl">
             {paras.map((p, i) => (
@@ -153,7 +181,7 @@ export function AboutSection() {
 
         <aside className="col-span-12 md:col-span-3 flex flex-col gap-8 md:items-end">
           <motion.div
-            className="relative w-full aspect-4/5 max-w-72 overflow-hidden bg-ink"
+            className="hidden md:block relative w-full aspect-4/5 max-w-72 overflow-hidden bg-ink"
             initial={reduce ? false : { opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: "some" }}

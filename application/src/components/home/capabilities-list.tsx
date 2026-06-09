@@ -31,10 +31,10 @@ export function CapabilitiesList() {
 
   const titleParts: { text: string; em?: boolean }[] = [
     { text: "Quatre" },
-    { text: "territoires,", em: true },
-    { text: "une" },
-    { text: "seule" },
-    { text: "signature." },
+    { text: "metiers,", em: true },
+    { text: "un" },
+    { text: "seul" },
+    { text: "artisan." },
   ];
 
   return (

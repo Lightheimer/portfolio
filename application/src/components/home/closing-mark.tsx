@@ -62,7 +62,7 @@ export function ClosingMark() {
           transition={{ duration: 0.9, delay: 0.5, ease }}
         >
           <MagneticLink
-            href="mailto:lightheimer@gmail.com"
+            href="mailto:koudjisamson@gmail.com"
             strength={0.35}
             className="group items-center gap-3 bg-ink text-paper px-8 py-5 hover:bg-rouge transition-colors duration-300 whitespace-nowrap"
           >

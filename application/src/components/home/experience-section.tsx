@@ -39,8 +39,8 @@ const ENTRIES: Entry[] = [
     company: "UNICEF Togo",
     context: "Lome",
     body:
-      "Conception et developpement d'une plateforme hospitaliere de suivi des operations terrain. Projet de fin de cycle soutenu devant jury et note 18/20. Demo locale, non deploye en production.",
-    tags: ["Laravel", "PostgreSQL", "Offline-first", "Soutenance 18/20"],
+      "Stage ICT4D au bureau pays. Deux livrables : GFA, plateforme de gestion du courrier de l'Assemblee Nationale Togolaise (en service), et une plateforme hospitaliere de suivi des operations terrain — projet de fin de cycle, soutenu devant jury, note 18/20 (demo locale, non deploye).",
+    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL", "Soutenance 18/20"],
   },
   {
     index: "03",

@@ -57,14 +57,15 @@ export function SiteHeader() {
           <Link
             href="/"
             aria-label="Junior Samuel Koudji, accueil"
-            className="font-display text-[17px] sm:text-[19px] tracking-tight leading-none"
+            className="font-display tracking-tight leading-none"
             onClick={() => setOpen(false)}
           >
-            Junior Samuel Koudji
+            <span className="hidden lg:inline text-[17px] sm:text-[19px]">Junior Samuel Koudji</span>
+            <span className="lg:hidden text-[17px] sm:text-[19px]">J.&thinsp;Samuel Koudji</span>
           </Link>
 
           <nav aria-label="Navigation principale" className="hidden md:block">
-            <ul className="flex items-center gap-9">
+            <ul className="flex items-center gap-6 lg:gap-9">
               {NAV.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -80,13 +81,17 @@ export function SiteHeader() {
 
           <Link
             href="/#contact"
-            className="group hidden md:inline-flex items-center gap-2.5 bg-ink text-paper px-5 py-2.5 text-[12px] font-medium tracking-[0.12em] uppercase hover:bg-rouge transition-colors duration-300"
+            className="group hidden md:inline-flex items-center gap-2.5 bg-ink text-paper px-4 lg:px-5 py-2.5 text-[11px] lg:text-[12px] font-medium tracking-[0.12em] uppercase hover:bg-rouge transition-colors duration-300"
           >
             <span
               aria-hidden
               className="size-1.5 rounded-full bg-rouge group-hover:bg-paper transition-colors"
             />
-            Disponible
+            <span className="hidden lg:inline">Echangeons</span>
+            <span className="lg:hidden">Contact</span>
+            <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+              {"\u2192"}
+            </span>
           </Link>
 
           <button
@@ -196,10 +201,10 @@ export function SiteHeader() {
                   <div>
                     <p className="eyebrow mb-2">Email</p>
                     <Link
-                      href="mailto:lightheimer@gmail.com"
+                      href="mailto:koudjisamson@gmail.com"
                       className="underline underline-offset-4 hover:text-rouge"
                     >
-                      lightheimer@gmail.com
+                      koudjisamson@gmail.com
                     </Link>
                   </div>
                 </div>

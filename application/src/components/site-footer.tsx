@@ -11,7 +11,7 @@ export function SiteFooter() {
             <p className="display text-4xl md:text-6xl">
               Disponible
               <br />
-              pour <em>commission.</em>
+              pour <em>collaborer.</em>
             </p>
             <Link
               href="mailto:koudjisamson@gmail.com"
