@@ -14,11 +14,11 @@ export function SiteFooter() {
               pour <em>commission.</em>
             </p>
             <Link
-              href="mailto:lightheimer@gmail.com"
+              href="mailto:koudjisamson@gmail.com"
               className="mt-8 inline-flex items-center gap-3 group"
             >
               <span className="font-display italic text-2xl border-b border-foreground pb-1 group-hover:text-rouge group-hover:border-rouge transition-colors">
-                lightheimer@gmail.com
+                koudjisamson@gmail.com
               </span>
             </Link>
           </div>

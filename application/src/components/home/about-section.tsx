@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 /**
@@ -114,8 +115,10 @@ export function AboutSection() {
                   "Prisma",
                   "Tailwind",
                   "Shopify",
-                  "AI Agents",
-                  "Prompt Engineering",
+                  "REST APIs",
+                  "Server Actions",
+                  "Offline-first",
+                  "PWA",
                   "Git",
                   "Vercel",
                 ].map((t) => (
@@ -150,29 +153,29 @@ export function AboutSection() {
 
         <aside className="col-span-12 md:col-span-3 flex flex-col gap-8 md:items-end">
           <motion.div
-            className="relative w-full aspect-square max-w-70 flex items-center justify-center bg-ink text-paper overflow-hidden"
-            aria-hidden
+            className="relative w-full aspect-4/5 max-w-72 overflow-hidden bg-ink"
             initial={reduce ? false : { opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 1.4, delay: 0.1, ease }}
           >
+            <Image
+              src="/profile.jpg"
+              alt="Portrait Junior Samuel Koudji"
+              fill
+              sizes="(min-width: 768px) 288px, 60vw"
+              className="object-cover object-center"
+              style={{ filter: "grayscale(100%) contrast(1.05) brightness(0.95)" }}
+            />
             <span
-              className="font-display italic"
-              style={{
-                fontSize: "clamp(5rem, 14vw, 9rem)",
-                lineHeight: 1,
-                letterSpacing: "-0.04em",
-              }}
-            >
-              JK
-              <span className="text-rouge">.</span>
+              aria-hidden
+              className="absolute inset-0 bg-linear-to-t from-ink/40 via-transparent to-transparent"
+            />
+            <span className="absolute top-3 left-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/70">
+              Portrait
             </span>
-            <span className="absolute top-3 left-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/55">
-              Signature
-            </span>
-            <span className="absolute bottom-3 right-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/55 tnum">
-              2026
+            <span className="absolute bottom-3 right-3 text-[9px] tracking-[0.3em] uppercase font-mono text-paper/70 tnum">
+              JK / 2026
             </span>
           </motion.div>
 
@@ -190,10 +193,10 @@ export function AboutSection() {
               Freelance : delai selon dispo.
             </p>
             <Link
-              href="mailto:lightheimer@gmail.com"
+              href="mailto:koudjisamson@gmail.com"
               className="mt-4 inline-flex items-center gap-2 font-display italic text-[18px] border-b border-foreground pb-1 hover:text-rouge hover:border-rouge transition-colors"
             >
-              lightheimer@gmail.com
+              koudjisamson@gmail.com
             </Link>
           </div>
         </aside>

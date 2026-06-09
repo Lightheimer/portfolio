@@ -13,8 +13,8 @@ const ITEMS = [
   "Node.js",
   "TypeScript",
   "Shopify",
-  "AI Agents",
-  "Prompt Engineering",
+  "REST APIs",
+  "Server Actions",
   "Supabase",
   "Prisma",
   "PostgreSQL",
@@ -22,6 +22,7 @@ const ITEMS = [
   "Tailwind",
   "Mobile money",
   "Offline-first",
+  "PWA",
 ];
 
 export function StackMarquee() {

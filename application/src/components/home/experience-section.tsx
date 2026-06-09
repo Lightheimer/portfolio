@@ -28,8 +28,8 @@ const ENTRIES: Entry[] = [
     company: "Freelance",
     context: "Togo & international",
     body:
-      "Developpement de sites web, boutiques Shopify et agents IA pour clients au Togo et a l'international. Specialite : e-commerce et automatisation IA.",
-    tags: ["Laravel", "Shopify", "React", "AI Agents"],
+      "Developpement de sites web et boutiques Shopify pour clients au Togo et a l'international. Specialite : e-commerce, plateformes metier et offline-first.",
+    tags: ["Laravel", "Shopify", "Next.js", "PostgreSQL"],
   },
   {
     index: "02",
@@ -39,8 +39,8 @@ const ENTRIES: Entry[] = [
     company: "UNICEF Togo",
     context: "Lome",
     body:
-      "Conception et developpement de solutions numeriques pour ameliorer les operations terrain de l'UNICEF Togo. Contexte offline-first, mobile money, contraintes reseau.",
-    tags: ["ICT4D", "Laravel", "Mobile Money", "Offline-first"],
+      "Conception et developpement d'une plateforme hospitaliere de suivi des operations terrain. Projet de fin de cycle soutenu devant jury et note 18/20. Demo locale, non deploye en production.",
+    tags: ["Laravel", "PostgreSQL", "Offline-first", "Soutenance 18/20"],
   },
   {
     index: "03",

@@ -1,9 +1,22 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+} from "motion/react";
+
+/**
+ * SelectedWork — refonte cinematique "Manufacture" inspiree Cartier.
+ * Section sombre, projets projetes comme sur un ecran d'atelier.
+ * Chaque scene = image plein cadre, halo dore ambiant,
+ * titre en Fraunces, parallaxe au scroll, statut discret.
+ */
 
 type Project = {
   slug?: string;
@@ -13,10 +26,9 @@ type Project = {
   context: string;
   year: string;
   stack: string;
-  status?: { label: string; tone?: "live" | "wip" | "confidential" | "done" };
+  status?: { label: string; tone?: "live" | "wip" | "soutenu" | "done" };
   image?: string;
   alt?: string;
-  span: "feature" | "half";
 };
 
 const PROJECTS: Project[] = [
@@ -30,7 +42,6 @@ const PROJECTS: Project[] = [
     status: { label: "En production", tone: "live" },
     image: "/work/pikarre.jpg",
     alt: "Hero PIKARRE Apart, location premium a Lome",
-    span: "feature",
   },
   {
     slug: "https://vanelys.infinityfreeapp.com/",
@@ -43,51 +54,38 @@ const PROJECTS: Project[] = [
     status: { label: "En ligne", tone: "live" },
     image: "/work/vanelys.jpg",
     alt: "Vanelys, boutique e-commerce mode a Lome",
-    span: "half",
   },
   {
     index: "03",
-    title: "GFA",
-    subtitle: "Gestion de flux . Assemblee nationale",
-    context: "Institution publique, suivi documentaire",
-    year: "2024",
-    stack: "Laravel . PHP . PostgreSQL",
-    status: { label: "Confidentiel", tone: "confidential" },
-    image: "/work/gfa-welcome.jpg",
-    alt: "GFA, plateforme de gestion de flux pour l'Assemblee nationale",
-    span: "half",
-  },
-  {
-    index: "04",
     title: "CBC",
     subtitle: "Catholic Basketball Club . Lome",
-    context: "Identite, app club, comptabilite",
+    context: "Identite, app club, comptabilite transparente",
     year: "2026",
     stack: "Next.js 16 . Supabase . Prisma 7",
     status: { label: "En cours", tone: "wip" },
     image: "/work/cbc.jpg",
     alt: "Accueil CBC, street basketball club a Lome",
-    span: "half",
+  },
+  {
+    index: "04",
+    title: "GFA",
+    subtitle: "Plateforme hospitaliere . UNICEF Togo",
+    context: "Stage UNICEF Togo, projet de fin de cycle, soutenance 18/20",
+    year: "2025",
+    stack: "Laravel . PHP . PostgreSQL",
+    status: { label: "Soutenu 18/20", tone: "soutenu" },
+    image: "/work/gfa-welcome.jpg",
+    alt: "GFA, plateforme hospitaliere realisee a l'UNICEF Togo",
   },
   {
     index: "05",
-    title: "Boutique Telephonie",
-    subtitle: "E-commerce accessoires mobiles",
-    context: "Vente accessoires, gestion stock et paiement",
-    year: "2024",
-    stack: "Laravel . MySQL . Bootstrap",
+    title: "Marlone",
+    subtitle: "Atelier mode . Boutique + caisse",
+    context: "POS + e-commerce, gestion stock multi-variantes, demo locale",
+    year: "2026",
+    stack: "Laravel . Livewire . MySQL",
     status: { label: "Livre", tone: "done" },
-    span: "half",
-  },
-  {
-    index: "06",
-    title: "Boutique E-commerce",
-    subtitle: "Plateforme complete avec dashboard admin",
-    context: "Boutique en ligne, gestion produits, paiement",
-    year: "2023",
-    stack: "Laravel . MySQL . JavaScript",
-    status: { label: "Deploye", tone: "done" },
-    span: "half",
+    alt: "Marlone, atelier mode et boutique POS",
   },
 ];
 
@@ -96,68 +94,304 @@ export function SelectedWork() {
     <section
       id="work"
       aria-label="Travail selectionne"
-      className="mx-auto max-w-350 px-6 sm:px-10 py-20 sm:py-28 md:py-40 scroll-mt-24"
+      className="relative bg-ink text-paper overflow-hidden"
     >
-      <header className="mb-12 sm:mb-16 md:mb-24 grid grid-cols-12 gap-6 items-end">
-        <div className="col-span-12 md:col-span-8">
-          <p className="eyebrow mb-5">04 / Selection</p>
-          <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)]">
-            Six projets.
-            <br />
-            <em>Un seul atelier.</em>
-          </h2>
-        </div>
-        <div className="hidden md:flex col-span-4 justify-end items-end pb-2">
-          <Link
-            href="https://github.com/Lightheimer"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] font-medium border-b border-foreground pb-1 hover:text-rouge hover:border-rouge transition-colors"
-          >
-            Voir sur GitHub
-            <span aria-hidden className="transition-transform group-hover:translate-x-1.5">
-              {"\u2192"}
-            </span>
-          </Link>
-        </div>
-      </header>
+      {/* Atmosphere ambiante (or + rouge tres legers) */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 20% 20%, rgba(232,200,140,0.35), transparent 60%), radial-gradient(circle at 80% 80%, rgba(200,16,46,0.22), transparent 65%)",
+        }}
+      />
 
-      <FeatureCard project={PROJECTS[0]} index={0} />
+      <div className="relative mx-auto max-w-350 px-6 sm:px-10 pt-24 sm:pt-32 md:pt-44 pb-20 sm:pb-28 md:pb-32">
+        <SectionHeader />
 
-      <div className="grid md:grid-cols-2 gap-8 md:gap-12 mt-10 sm:mt-12 md:mt-20">
-        {PROJECTS.slice(1).map((p, i) => (
-          <HalfCard key={p.title} project={p} index={i + 1} />
-        ))}
+        <div className="mt-16 sm:mt-24 md:mt-32 space-y-28 sm:space-y-36 md:space-y-48">
+          {PROJECTS.map((p, i) => (
+            <ProjectStage key={p.title} project={p} index={i} />
+          ))}
+        </div>
+
+        <FinalSeal />
       </div>
     </section>
   );
 }
 
-function StatusBadge({
-  status,
-  className = "",
-}: {
-  status: NonNullable<Project["status"]>;
-  className?: string;
-}) {
-  const tone = status.tone ?? "done";
-  const toneClasses =
-    tone === "live"
-      ? "bg-rouge text-paper"
-      : tone === "wip"
-      ? "bg-paper text-foreground border border-foreground/15"
-      : tone === "confidential"
-      ? "bg-ink text-paper"
-      : "bg-paper text-foreground border border-hairline";
+function SectionHeader() {
+  const reduce = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
   return (
-    <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-medium ${toneClasses} ${className}`}
+    <header className="grid grid-cols-12 gap-6 items-end">
+      <div className="col-span-12 md:col-span-9">
+        <motion.p
+          className="eyebrow text-paper/55 mb-5"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: "some" }}
+          transition={{ duration: 0.7, ease }}
+        >
+          04 / La Manufacture
+        </motion.p>
+        <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)] leading-none">
+          <motion.span
+            className="block"
+            initial={reduce ? false : { y: 28, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: "some" }}
+            transition={{ duration: 0.9, ease }}
+          >
+            Cinq projets.
+          </motion.span>
+          <motion.span
+            className="block italic text-paper/75"
+            initial={reduce ? false : { y: 28, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: "some" }}
+            transition={{ duration: 0.95, delay: 0.12, ease }}
+          >
+            Un seul atelier<span className="text-rouge not-italic">.</span>
+          </motion.span>
+        </h2>
+      </div>
+      <div className="hidden md:flex col-span-3 justify-end items-end pb-2">
+        <Link
+          href="https://github.com/Lightheimer"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] font-medium border-b border-paper/30 pb-1 text-paper/70 hover:text-paper hover:border-paper transition-colors"
+        >
+          Voir sur GitHub
+          <span
+            aria-hidden
+            className="transition-transform group-hover:translate-x-1.5"
+          >
+            {"\u2192"}
+          </span>
+        </Link>
+      </div>
+    </header>
+  );
+}
+
+function ProjectStage({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) {
+  const reduce = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1] as const;
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], ["6%", "-6%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.06, 1, 1.04]);
+  const titleY = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]);
+  const ambientOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.7, 1],
+    [0, 1, 1, 0],
+  );
+
+  const alignRight = index % 2 === 1;
+
+  return (
+    <motion.article
+      ref={ref}
+      className="relative"
+      initial={reduce ? false : { opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: "some" }}
+      transition={{ duration: 1.1, ease }}
     >
-      {tone === "live" ? (
-        <span aria-hidden className="size-1 rounded-full bg-paper animate-pulse" />
-      ) : null}
-      {status.label}
-    </span>
+      <CardShell project={project}>
+        <div className="grid grid-cols-12 gap-6 md:gap-10 items-center">
+          {/* Index vertical lateral */}
+          <div
+            className={`hidden md:flex col-span-1 ${
+              alignRight ? "md:order-last md:justify-end" : "md:justify-start"
+            }`}
+          >
+            <span className="font-mono text-[10px] tracking-[0.3em] text-paper/45 [writing-mode:vertical-rl] rotate-180">
+              N. {project.index}
+            </span>
+          </div>
+
+          {/* Scene (ecran de projection) */}
+          <div
+            className={`col-span-12 md:col-span-7 ${
+              alignRight ? "md:col-start-5" : ""
+            }`}
+          >
+            <Stage
+              project={project}
+              imageY={imageY}
+              imageScale={imageScale}
+              ambientOpacity={ambientOpacity}
+              reduce={!!reduce}
+            />
+          </div>
+
+          {/* Texte (cote oppose) */}
+          <div
+            className={`col-span-12 md:col-span-4 ${
+              alignRight ? "md:col-start-1 md:row-start-1" : ""
+            }`}
+          >
+            <ProjectMeta project={project} titleY={titleY} reduce={!!reduce} />
+          </div>
+        </div>
+      </CardShell>
+    </motion.article>
+  );
+}
+
+function Stage({
+  project,
+  imageY,
+  imageScale,
+  ambientOpacity,
+  reduce,
+}: {
+  project: Project;
+  imageY: MotionValue<string>;
+  imageScale: MotionValue<number>;
+  ambientOpacity: MotionValue<number>;
+  reduce: boolean;
+}) {
+  return (
+    <div
+      className="relative aspect-16/10 w-full"
+      style={{ containerType: "size" }}
+    >
+      {/* Halo dore ambiant (projecteur) */}
+      <motion.span
+        aria-hidden
+        className="pointer-events-none absolute -inset-12 md:-inset-20 blur-3xl"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(232,200,140,0.32), rgba(200,16,46,0.12) 45%, transparent 75%)",
+          opacity: reduce ? 0.65 : ambientOpacity,
+        }}
+      />
+
+      {/* Cadre ecran */}
+      <div className="absolute inset-0 overflow-hidden bg-paper-soft shadow-[0_40px_120px_-20px_rgba(0,0,0,0.65)] ring-1 ring-paper/10">
+        {project.image ? (
+          <motion.div
+            className="absolute inset-0"
+            style={{
+              y: reduce ? "0%" : imageY,
+              scale: reduce ? 1 : imageScale,
+            }}
+          >
+            <Image
+              src={project.image}
+              alt={project.alt ?? project.title}
+              fill
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              className="object-cover object-top"
+            />
+          </motion.div>
+        ) : (
+          <PlaceholderTile title={project.title} year={project.year} />
+        )}
+
+        {/* Vignette */}
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, transparent 55%, rgba(12,12,12,0.55) 100%), radial-gradient(ellipse at center, transparent 60%, rgba(12,12,12,0.45) 100%)",
+          }}
+        />
+
+        {/* Statut discret */}
+        {project.status ? (
+          <StatusBadge
+            status={project.status}
+            className="absolute bottom-4 left-4 z-10"
+          />
+        ) : null}
+
+        {/* Hover label */}
+        {project.slug ? (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute top-4 right-4 z-10 px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium bg-paper/95 text-foreground opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
+          >
+            Visiter le projet {"\u2192"}
+          </span>
+        ) : null}
+      </div>
+
+      {/* Petits piliers de scene */}
+      <span
+        aria-hidden
+        className="hidden md:block absolute left-0 -bottom-4 h-4 w-px bg-linear-to-b from-paper/30 to-transparent"
+      />
+      <span
+        aria-hidden
+        className="hidden md:block absolute right-0 -bottom-4 h-4 w-px bg-linear-to-b from-paper/30 to-transparent"
+      />
+    </div>
+  );
+}
+
+function ProjectMeta({
+  project,
+  titleY,
+  reduce,
+}: {
+  project: Project;
+  titleY: MotionValue<string>;
+  reduce: boolean;
+}) {
+  return (
+    <div className="md:py-4">
+      <p className="eyebrow text-paper/45 mb-3 tnum md:hidden">
+        N. {project.index}
+      </p>
+
+      <motion.h3
+        className="display text-3xl sm:text-4xl md:text-5xl leading-[1.05] text-paper"
+        style={{ y: reduce ? "0%" : titleY }}
+      >
+        {project.title}
+        <span className="text-rouge">.</span>
+      </motion.h3>
+
+      <p className="font-display italic text-paper/60 text-lg md:text-xl mt-2">
+        {project.subtitle}
+      </p>
+
+      <div className="mt-6 h-px w-12 bg-paper/30" />
+
+      <p className="mt-6 text-[13.5px] leading-[1.7] text-paper/75 max-w-md">
+        {project.context}
+      </p>
+
+      <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-3 text-[11px] tracking-[0.06em]">
+        <div>
+          <dt className="text-paper/40 uppercase mb-1">Annee</dt>
+          <dd className="text-paper tnum">{project.year}</dd>
+        </div>
+        <div>
+          <dt className="text-paper/40 uppercase mb-1">Stack</dt>
+          <dd className="text-paper">{project.stack}</dd>
+        </div>
+      </dl>
+    </div>
   );
 }
 
@@ -181,6 +415,37 @@ function CardShell({
     >
       {children}
     </Link>
+  );
+}
+
+function StatusBadge({
+  status,
+  className = "",
+}: {
+  status: NonNullable<Project["status"]>;
+  className?: string;
+}) {
+  const tone = status.tone ?? "done";
+  const toneClasses =
+    tone === "live"
+      ? "bg-rouge text-paper"
+      : tone === "wip"
+      ? "bg-paper text-foreground"
+      : tone === "soutenu"
+      ? "bg-paper/95 text-foreground"
+      : "bg-paper/90 text-foreground";
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-medium ${toneClasses} ${className}`}
+    >
+      {tone === "live" ? (
+        <span
+          aria-hidden
+          className="size-1 rounded-full bg-paper animate-pulse"
+        />
+      ) : null}
+      {status.label}
+    </span>
   );
 }
 
@@ -215,161 +480,21 @@ function PlaceholderTile({ title, year }: { title: string; year: string }) {
   );
 }
 
-function FeatureCard({ project, index }: { project: Project; index: number }) {
-  const reduce = useReducedMotion();
-  const ease = [0.22, 1, 0.36, 1] as const;
+function FinalSeal() {
   return (
-    <motion.article
-      initial={reduce ? false : { opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: "some" }}
-      transition={{ duration: 1.1, delay: index * 0.12, ease }}
-    >
-      <CardShell project={project}>
-        <div
-          className="relative aspect-16/10 w-full overflow-hidden bg-bone"
-          style={{ containerType: "size" }}
-        >
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={project.alt ?? project.title}
-              fill
-              sizes="(min-width: 1024px) 1400px, 100vw"
-              className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
-              priority
-            />
-          ) : (
-            <PlaceholderTile title={project.title} year={project.year} />
-          )}
-          <span className="absolute top-4 left-4 sm:top-5 sm:left-5 z-10 px-3 py-1 bg-paper text-foreground text-[10px] sm:text-[11px] tracking-[0.18em] uppercase">
-            Feature
-          </span>
-          {project.status ? (
-            <StatusBadge
-              status={project.status}
-              className="absolute top-4 right-4 sm:top-5 sm:right-5 z-10"
-            />
-          ) : null}
-
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-          >
-            <span
-              className="font-display italic select-none"
-              style={{
-                fontSize: "clamp(4rem, 14vw, 11rem)",
-                color: "rgba(250,250,248,0.92)",
-                mixBlendMode: "difference",
-                letterSpacing: "-0.04em",
-                lineHeight: 1,
-              }}
-            >
-              {project.title}
-            </span>
-          </span>
-        </div>
-
-        <div className="mt-5 sm:mt-6 grid grid-cols-12 gap-4 sm:gap-6">
-          <div className="col-span-12 md:col-span-2">
-            <p className="eyebrow tnum">N. {project.index}</p>
-          </div>
-          <div className="col-span-12 md:col-span-7">
-            <h3 className="display text-2xl sm:text-3xl md:text-5xl">
-              {project.title}.{" "}
-              <em className="text-foreground/60">{project.subtitle}</em>
-            </h3>
-          </div>
-          <div className="col-span-12 md:col-span-3 md:text-right">
-            <p className="text-[13px] leading-relaxed text-muted">
-              {project.context}
-              <br />
-              <span className="tnum">{project.year}</span>
-              <br />
-              {project.stack}
-            </p>
-          </div>
-        </div>
-      </CardShell>
-    </motion.article>
-  );
-}
-
-function HalfCard({ project, index }: { project: Project; index: number }) {
-  const reduce = useReducedMotion();
-  const ease = [0.22, 1, 0.36, 1] as const;
-  return (
-    <motion.article
-      initial={reduce ? false : { opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: "some" }}
-      transition={{ duration: 1.1, delay: index * 0.12, ease }}
-    >
-      <CardShell project={project}>
-        <div
-          className="relative aspect-4/5 w-full overflow-hidden bg-bone"
-          style={{ containerType: "size" }}
-        >
-          {project.image ? (
-            <Image
-              src={project.image}
-              alt={project.alt ?? project.title}
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover object-top transition-transform duration-1000 ease-out group-hover:scale-[1.06]"
-              loading="eager"
-            />
-          ) : (
-            <PlaceholderTile title={project.title} year={project.year} />
-          )}
-          {project.status ? (
-            <StatusBadge
-              status={project.status}
-              className="absolute top-4 left-4 z-10"
-            />
-          ) : null}
-
-          <span
-            aria-hidden
-            className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-          >
-            <span
-              className="font-display italic select-none"
-              style={{
-                fontSize: "clamp(3rem, 18cqw, 8rem)",
-                color: "rgba(250,250,248,0.95)",
-                mixBlendMode: "difference",
-                letterSpacing: "-0.04em",
-                lineHeight: 1,
-              }}
-            >
-              {project.title}
-            </span>
-          </span>
-        </div>
-
-        <div className="mt-5 flex items-baseline justify-between gap-4">
-          <div className="min-w-0">
-            <p className="eyebrow tnum mb-2">N. {project.index}</p>
-            <h3 className="display text-2xl md:text-3xl">{project.title}</h3>
-            <p className="font-display italic text-foreground/60 text-base md:text-lg mt-1">
-              {project.subtitle}
-            </p>
-          </div>
-          {project.slug ? (
-            <span
-              aria-hidden
-              className="shrink-0 text-[12px] uppercase tracking-[0.18em] font-medium opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-rouge"
-            >
-              {"\u2192"}
-            </span>
-          ) : null}
-        </div>
-        <p className="text-[13px] text-muted mt-2 tnum">
-          {project.year}. {project.stack}.
-        </p>
-      </CardShell>
-    </motion.article>
+    <div className="mt-24 md:mt-32 flex flex-col items-center gap-4 text-center">
+      <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-paper/40">
+        Fin de la Manufacture
+      </span>
+      <span aria-hidden className="h-12 w-px bg-paper/20" />
+      <Link
+        href="https://github.com/Lightheimer"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="md:hidden inline-flex items-center gap-3 text-[12px] uppercase tracking-[0.18em] font-medium border-b border-paper/30 pb-1 text-paper/70 hover:text-paper hover:border-paper transition-colors"
+      >
+        Voir sur GitHub {"\u2192"}
+      </Link>
+    </div>
   );
 }
