@@ -19,7 +19,7 @@ export function AboutSection() {
   const paras = [
     "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system — chaque projet m'a forme sur le terrain.",
     "Ne au Togo, forme sur les contraintes du terrain ouest-africain : reseau intermittent, mobile money, offline-first. Le detail compte quand l'internet ne suit pas.",
-    "Cinq projets en ligne, dont une plateforme d'hospitalite urbaine, une suite documentaire pour une institution publique et deux boutiques e-commerce. Tout est concu pour tenir des annees — pas un trimestre.",
+    "Six projets en ligne, dont une plateforme d'hospitalite urbaine, deux e-commerces de mode, une suite documentaire pour une institution publique et un club sportif. Tout est concu pour tenir des annees — pas un trimestre.",
     "Aujourd'hui : disponible a Paris des octobre 2026 pour rejoindre une equipe produit ambitieuse en alternance. Lome. Paris.",
   ];
 

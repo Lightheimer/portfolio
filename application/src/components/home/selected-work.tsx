@@ -33,7 +33,20 @@ const PROJECTS: Project[] = [
     span: "feature",
   },
   {
+    slug: "https://vanelys.infinityfreeapp.com/",
     index: "02",
+    title: "Vanelys",
+    subtitle: "E-commerce mode . Lome",
+    context: "Boutique en ligne, catalogue, panier, WhatsApp checkout",
+    year: "2026",
+    stack: "Laravel . Livewire . MySQL",
+    status: { label: "En ligne", tone: "live" },
+    image: "/work/vanelys.jpg",
+    alt: "Vanelys, boutique e-commerce mode a Lome",
+    span: "half",
+  },
+  {
+    index: "03",
     title: "GFA",
     subtitle: "Gestion de flux . Assemblee nationale",
     context: "Institution publique, suivi documentaire",
@@ -45,7 +58,7 @@ const PROJECTS: Project[] = [
     span: "half",
   },
   {
-    index: "03",
+    index: "04",
     title: "CBC",
     subtitle: "Catholic Basketball Club . Lome",
     context: "Identite, app club, comptabilite",
@@ -57,7 +70,7 @@ const PROJECTS: Project[] = [
     span: "half",
   },
   {
-    index: "04",
+    index: "05",
     title: "Boutique Telephonie",
     subtitle: "E-commerce accessoires mobiles",
     context: "Vente accessoires, gestion stock et paiement",
@@ -67,7 +80,7 @@ const PROJECTS: Project[] = [
     span: "half",
   },
   {
-    index: "05",
+    index: "06",
     title: "Boutique E-commerce",
     subtitle: "Plateforme complete avec dashboard admin",
     context: "Boutique en ligne, gestion produits, paiement",
@@ -89,7 +102,7 @@ export function SelectedWork() {
         <div className="col-span-12 md:col-span-8">
           <p className="eyebrow mb-5">04 / Selection</p>
           <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)]">
-            Cinq projets.
+            Six projets.
             <br />
             <em>Un seul atelier.</em>
           </h2>
