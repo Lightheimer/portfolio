@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 /**
@@ -29,8 +30,45 @@ export function HeroDisplay() {
       aria-label="Presentation"
       className="relative mx-auto w-full max-w-350 px-6 sm:px-10 pt-12 sm:pt-20"
     >
+      {/* Portrait éditorial — desktop uniquement, fondu vers le paper */}
       <motion.div
-        className="grid grid-cols-12 gap-6 pb-8 border-b border-hairline"
+        aria-hidden
+        className="pointer-events-none hidden md:block absolute right-[-6%] lg:right-[-4%] top-20 lg:top-28 h-[clamp(26rem,72vh,46rem)] w-[clamp(20rem,38vw,32rem)] z-0 overflow-hidden"
+        initial={reduce ? false : { opacity: 0, scale: 1.04 }}
+        animate={{ opacity: 0.55, scale: 1 }}
+        transition={{ duration: 1.8, delay: 0.3, ease }}
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 65% 70% at 50% 45%, #000 0%, #000 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.12) 78%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 65% 70% at 50% 45%, #000 0%, #000 25%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0.12) 78%, transparent 100%)",
+        }}
+      >
+        <Image
+          src="/profile.jpg"
+          alt=""
+          fill
+          priority
+          sizes="(min-width: 1024px) 32rem, 38vw"
+          className="object-cover object-[50%_30%]"
+          style={{
+            filter:
+              "grayscale(100%) contrast(1.05) brightness(0.96) sepia(0.04)",
+          }}
+        />
+        {/* Voile paper supplémentaire — fond plus diffus, sans coupure dure */}
+        <span
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, var(--color-paper) 0%, rgba(250,250,248,0.6) 14%, rgba(250,250,248,0.18) 42%, rgba(250,250,248,0.2) 70%, rgba(250,250,248,0.55) 92%, var(--color-paper) 100%)",
+          }}
+        />
+      </motion.div>
+
+      <motion.div
+        className="relative z-10 grid grid-cols-12 gap-6 pb-8 border-b border-hairline"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease }}
@@ -45,7 +83,7 @@ export function HeroDisplay() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-12 gap-x-6 gap-y-10 pt-10 sm:pt-20 pb-16 md:pb-32">
+      <div className="relative z-10 grid grid-cols-12 gap-x-6 gap-y-10 pt-10 sm:pt-20 pb-16 md:pb-32">
         <div className="col-span-12 md:col-span-9">
           <motion.h1
             className="display text-[clamp(2.5rem,11vw,9.5rem)] leading-none"
