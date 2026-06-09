@@ -2,6 +2,7 @@ import { HeroDisplay } from "@/components/home/hero-display";
 import { SelectedWork } from "@/components/home/selected-work";
 import { Manifesto } from "@/components/home/manifesto";
 import { AboutSection } from "@/components/home/about-section";
+import { ExperienceSection } from "@/components/home/experience-section";
 import { StackMarquee } from "@/components/home/stack-marquee";
 import { CapabilitiesList } from "@/components/home/capabilities-list";
 import { ClosingMark } from "@/components/home/closing-mark";
@@ -15,8 +16,9 @@ export default function Home() {
       <ScrollHint />
       <HeroDisplay />
       <Manifesto />
-      <AboutSection />
+      <ExperienceSection />
       <SelectedWork />
+      <AboutSection />
       <StackMarquee />
       <CapabilitiesList />
       <ClosingMark />

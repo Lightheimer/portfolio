@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     template: "%s. Junior Samuel KOUDJI",
   },
   description:
-    "Software engineer. Laravel, Next.js, ICT4D. Lome to Paris.",
+    "Developpeur Fullstack | Laravel, React, Next.js, Shopify | Ex-UNICEF Togo | En alternance a Paris — Octobre 2026.",
   authors: [{ name: "Junior Samuel KOUDJI" }],
   openGraph: {
     title: "Junior Samuel KOUDJI",
-    description: "Software engineer. Laravel, Next.js, ICT4D. Lome to Paris.",
+    description: "Developpeur Fullstack | Laravel, React, Next.js, Shopify | Ex-UNICEF Togo | En alternance a Paris — Octobre 2026.",
     type: "website",
     locale: "fr_FR",
   },

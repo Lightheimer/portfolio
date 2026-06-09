@@ -17,10 +17,10 @@ export function AboutSection() {
   ];
 
   const paras = [
-    "Cinq ans à construire des produits qui survivent au lundi matin. Du backend Laravel au design system, de la stack Spring Boot aux déploiements Vercel. Un seul atelier.",
-    "Né au Togo, formé sur les contraintes du terrain ouest-africain : réseau intermittent, mobile money, offline-first. Le détail compte quand l'internet ne suit pas.",
-    "Trois projets en ligne, dont une plateforme d'hospitalité urbaine et une suite documentaire pour une institution publique. Tout est conçu pour tenir des années — pas un trimestre.",
-    "Aujourd'hui : disponible pour rejoindre une équipe produit ambitieuse, en remote ou avec relocation. Lomé. Paris.",
+    "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system — chaque projet m'a forme sur le terrain.",
+    "Ne au Togo, forme sur les contraintes du terrain ouest-africain : reseau intermittent, mobile money, offline-first. Le detail compte quand l'internet ne suit pas.",
+    "Cinq projets en ligne, dont une plateforme d'hospitalite urbaine, une suite documentaire pour une institution publique et deux boutiques e-commerce. Tout est concu pour tenir des annees — pas un trimestre.",
+    "Aujourd'hui : disponible a Paris des octobre 2026 pour rejoindre une equipe produit ambitieuse en alternance. Lome. Paris.",
   ];
 
   return (
@@ -29,21 +29,26 @@ export function AboutSection() {
       aria-label="À propos"
       className="border-t border-hairline scroll-mt-24"
     >
-      <div className="mx-auto max-w-350 px-6 sm:px-10 py-24 sm:py-28 md:py-40 grid grid-cols-12 gap-6 md:gap-10">
+      <div className="mx-auto max-w-350 px-6 sm:px-10 py-20 sm:py-28 md:py-40 grid grid-cols-12 gap-6 md:gap-10">
         <div className="col-span-12 md:col-span-2">
           <motion.p
             className="eyebrow"
             initial={reduce ? false : { opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, ease }}
           >
-            02 / À propos
+            05 / À propos
           </motion.p>
         </div>
 
         <div className="col-span-12 md:col-span-7">
-          <h2 className="display text-[clamp(2.25rem,7.5vw,5.5rem)]">
+          <motion.h2
+            className="display text-[clamp(2.25rem,7.5vw,5.5rem)]"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: "some" }}
+          >
             {titleLines.map((line, i) => (
               <span
                 key={i}
@@ -55,16 +60,21 @@ export function AboutSection() {
                     willChange: "transform, opacity",
                     fontWeight: line.em ? 500 : 400,
                   }}
-                  initial={reduce ? false : { y: "105%", opacity: 0 }}
-                  whileInView={{ y: "0%", opacity: 1 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  variants={
+                    reduce
+                      ? undefined
+                      : {
+                          hidden: { y: "105%", opacity: 0 },
+                          visible: { y: "0%", opacity: 1 },
+                        }
+                  }
                   transition={{ duration: 1.1, delay: 0.05 + i * 0.1, ease }}
                 >
                   {line.text}
                 </motion.span>
               </span>
             ))}
-          </h2>
+          </motion.h2>
 
           <div className="mt-10 sm:mt-12 grid sm:grid-cols-2 gap-x-10 gap-y-6 max-w-3xl">
             {paras.map((p, i) => (
@@ -73,7 +83,7 @@ export function AboutSection() {
                 className="text-[15px] leading-[1.7] text-foreground/85"
                 initial={reduce ? false : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
+                viewport={{ once: true, amount: "some" }}
                 transition={{ duration: 0.7, delay: 0.5 + i * 0.08, ease }}
               >
                 {p}
@@ -85,7 +95,7 @@ export function AboutSection() {
             className="mt-12 grid sm:grid-cols-2 gap-8 max-w-3xl"
             initial={reduce ? false : { opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, delay: 0.85, ease }}
           >
             <div>
@@ -93,14 +103,21 @@ export function AboutSection() {
               <ul className="flex flex-wrap gap-2">
                 {[
                   "Laravel",
-                  "Spring Boot",
+                  "PHP",
                   "Next.js",
+                  "React",
+                  "Node.js",
                   "TypeScript",
                   "PostgreSQL",
+                  "MySQL",
                   "Supabase",
                   "Prisma",
                   "Tailwind",
-                  "Motion",
+                  "Shopify",
+                  "AI Agents",
+                  "Prompt Engineering",
+                  "Git",
+                  "Vercel",
                 ].map((t) => (
                   <li
                     key={t}
@@ -137,7 +154,7 @@ export function AboutSection() {
             aria-hidden
             initial={reduce ? false : { opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: "some" }}
             transition={{ duration: 1.4, delay: 0.1, ease }}
           >
             <span
@@ -164,9 +181,13 @@ export function AboutSection() {
               <span className="size-1.5 rounded-full bg-rouge" /> Disponible
             </p>
             <p className="leading-relaxed text-foreground/80">
-              Pour commission.
+              Paris des octobre 2026.
               <br />
-              Sous 7 jours.
+              En recherche d&apos;alternance — Master
+              <br />
+              Developpeur Fullstack.
+              <br />
+              Freelance : delai selon dispo.
             </p>
             <Link
               href="mailto:lightheimer@gmail.com"

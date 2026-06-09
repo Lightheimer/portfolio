@@ -45,7 +45,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="https://www.linkedin.com/in/junior-samuel-koudji"
+                  href="https://www.linkedin.com/in/junior-samuel-koudji-9a4622279/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-rouge transition-colors"

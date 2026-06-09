@@ -24,33 +24,41 @@ export function ClosingMark() {
       id="contact"
       className="border-t border-hairline scroll-mt-24"
     >
-      <div className="mx-auto max-w-350 px-6 sm:px-10 py-32 grid md:grid-cols-12 gap-10 items-end">
-        <div className="md:col-span-7">
-          <p className="display text-5xl md:text-7xl lg:text-8xl leading-[0.96]">
-            {parts.map((p, i) => (
-              <span key={i}>
-                <span className="inline-block overflow-hidden pb-[0.05em] mb-[-0.05em] mr-[0.25em] align-bottom">
-                  <motion.span
-                    className={`inline-block ${p.em ? "italic" : ""}`}
-                    style={{ willChange: "transform, opacity", fontWeight: p.em ? 500 : 400 }}
-                    initial={reduce ? false : { y: "110%", opacity: 0 }}
-                    whileInView={{ y: "0%", opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 1.15, delay: i * 0.09, ease }}
-                  >
-                    {p.text}
-                  </motion.span>
-                </span>
-                {p.br ? <br /> : null}
+      <div className="mx-auto max-w-350 px-6 sm:px-10 py-20 sm:py-28 md:py-32 grid md:grid-cols-12 gap-10 items-end">
+        <motion.p
+          className="md:col-span-7 display text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[0.96]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: "some" }}
+        >
+          {parts.map((p, i) => (
+            <span key={i}>
+              <span className="inline-block overflow-hidden pb-[0.05em] mb-[-0.05em] mr-[0.25em] align-bottom">
+                <motion.span
+                  className={`inline-block ${p.em ? "italic" : ""}`}
+                  style={{ willChange: "transform, opacity", fontWeight: p.em ? 500 : 400 }}
+                  variants={
+                    reduce
+                      ? undefined
+                      : {
+                          hidden: { y: "110%", opacity: 0 },
+                          visible: { y: "0%", opacity: 1 },
+                        }
+                  }
+                  transition={{ duration: 1.15, delay: i * 0.09, ease }}
+                >
+                  {p.text}
+                </motion.span>
               </span>
-            ))}
-          </p>
-        </div>
+              {p.br ? <br /> : null}
+            </span>
+          ))}
+        </motion.p>
         <motion.div
           className="md:col-span-4 md:col-start-9 flex md:justify-end"
           initial={reduce ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: "some" }}
           transition={{ duration: 0.9, delay: 0.5, ease }}
         >
           <MagneticLink

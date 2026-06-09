@@ -10,7 +10,7 @@ const CAPABILITIES = [
   },
   {
     title: "Ingenierie",
-    body: "Backends Laravel et Spring Boot. Frontends React et Next.js. Bases relationnelles. Tests.",
+    body: "Backends Laravel et Node.js. Frontends React et Next.js. Bases relationnelles. Tests.",
     items: ["Backend", "Frontend", "DevOps"],
   },
   {
@@ -43,10 +43,15 @@ export function CapabilitiesList() {
       aria-label="Capacites"
       className="border-y border-hairline bg-paper-soft scroll-mt-24"
     >
-      <div className="mx-auto max-w-350 px-6 sm:px-10 py-28 md:py-40">
-        <div className="grid grid-cols-12 gap-6 mb-16 md:mb-24">
+      <div className="mx-auto max-w-350 px-6 sm:px-10 py-20 sm:py-28 md:py-40">
+        <div className="grid grid-cols-12 gap-6 mb-12 sm:mb-16 md:mb-24">
           <div className="col-span-12 md:col-span-9">
-            <h2 className="display text-5xl md:text-7xl leading-[0.96]">
+            <motion.h2
+              className="display text-4xl sm:text-5xl md:text-7xl leading-[0.96]"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: "some" }}
+            >
               {titleParts.map((p, i) => (
                 <span
                   key={i}
@@ -55,16 +60,21 @@ export function CapabilitiesList() {
                   <motion.span
                     className={`inline-block ${p.em ? "italic" : ""}`}
                     style={{ willChange: "transform, opacity" }}
-                    initial={reduce ? false : { y: "110%", opacity: 0 }}
-                    whileInView={{ y: "0%", opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
+                    variants={
+                      reduce
+                        ? undefined
+                        : {
+                            hidden: { y: "110%", opacity: 0 },
+                            visible: { y: "0%", opacity: 1 },
+                          }
+                    }
                     transition={{ duration: 1.1, delay: i * 0.08, ease }}
                   >
                     {p.text}
                   </motion.span>
                 </span>
               ))}
-            </h2>
+            </motion.h2>
           </div>
         </div>
 
@@ -75,7 +85,7 @@ export function CapabilitiesList() {
               className="bg-paper-soft p-8 md:p-10 flex flex-col gap-5 group hover:bg-paper transition-colors duration-500"
               initial={reduce ? false : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: "some" }}
               transition={{ duration: 1, delay: i * 0.1, ease }}
             >
               <p className="eyebrow tnum">N. 0{i + 1}</p>

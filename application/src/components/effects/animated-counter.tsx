@@ -12,6 +12,7 @@ type Props = {
   pad?: number;
   className?: string;
   duration?: number;
+  trailing?: string;
 };
 
 export function AnimatedCounter({
@@ -19,6 +20,7 @@ export function AnimatedCounter({
   pad = 2,
   className = "",
   duration = 1600,
+  trailing,
 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const [current, setCurrent] = useState(0);
@@ -66,6 +68,7 @@ export function AnimatedCounter({
   return (
     <span ref={ref} className={className}>
       {String(current).padStart(pad, "0")}
+      {trailing ? <span className="text-rouge">{trailing}</span> : null}
     </span>
   );
 }

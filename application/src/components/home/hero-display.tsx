@@ -45,9 +45,13 @@ export function HeroDisplay() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-12 gap-x-6 gap-y-12 pt-14 sm:pt-24 pb-20 md:pb-32">
+      <div className="grid grid-cols-12 gap-x-6 gap-y-10 pt-10 sm:pt-20 pb-16 md:pb-32">
         <div className="col-span-12 md:col-span-9">
-          <h1 className="display text-[clamp(2.5rem,11vw,9.5rem)] leading-[1]">
+          <motion.h1
+            className="display text-[clamp(2.5rem,11vw,9.5rem)] leading-none"
+            initial={reduce ? false : "hidden"}
+            animate="visible"
+          >
             {titleLines.map((line, i) => (
               <span
                 key={i}
@@ -59,8 +63,14 @@ export function HeroDisplay() {
                     willChange: "transform, opacity",
                     fontWeight: line.em ? 500 : 400,
                   }}
-                  initial={reduce ? false : { y: "110%", opacity: 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
+                  variants={
+                    reduce
+                      ? undefined
+                      : {
+                          hidden: { y: "110%", opacity: 0 },
+                          visible: { y: "0%", opacity: 1 },
+                        }
+                  }
                   transition={{
                     duration: 1.2,
                     delay: 0.2 + i * 0.07,
@@ -71,14 +81,14 @@ export function HeroDisplay() {
                 </motion.span>
               </span>
             ))}
-          </h1>
+          </motion.h1>
         </div>
 
         <aside className="col-span-12 md:col-span-3 md:pt-6 flex flex-col gap-8">
           {[
             {
               eyebrow: "Specialites",
-              lines: ["Laravel.", "Next.js.", "Java Spring.", "ICT4D."],
+              lines: ["Laravel.", "Next.js.", "Node.js.", "Shopify."],
             },
             {
               eyebrow: "Mission",
@@ -117,10 +127,24 @@ export function HeroDisplay() {
         </motion.div>
 
         <motion.div
+          className="col-span-12 md:col-span-8 md:col-start-1"
+          initial={reduce ? false : { opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.85, delay: 1.0, ease }}
+        >
+          <span
+            className="inline-flex items-center gap-2.5 border border-rouge/40 text-rouge bg-paper px-4 py-2 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-medium"
+          >
+            <span aria-hidden className="size-1.5 rounded-full bg-rouge animate-pulse" />
+            En recherche d&apos;alternance · Paris · Octobre 2026
+          </span>
+        </motion.div>
+
+        <motion.div
           className="col-span-12 md:col-span-4 md:col-start-9 flex md:justify-end items-end"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 1.0, ease }}
+          transition={{ duration: 0.9, delay: 1.15, ease }}
         >
           <Link
             href="/#work"

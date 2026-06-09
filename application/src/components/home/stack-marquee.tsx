@@ -7,14 +7,19 @@
 
 const ITEMS = [
   "Laravel",
-  "Spring Boot",
+  "PHP",
   "Next.js",
+  "React",
+  "Node.js",
+  "TypeScript",
+  "Shopify",
+  "AI Agents",
+  "Prompt Engineering",
   "Supabase",
   "Prisma",
   "PostgreSQL",
+  "MySQL",
   "Tailwind",
-  "Motion",
-  "ICT4D",
   "Mobile money",
   "Offline-first",
 ];
