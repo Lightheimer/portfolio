@@ -97,13 +97,13 @@ export function SelectedWork() {
       aria-label="Travail selectionne"
       className="relative bg-ink text-paper overflow-hidden"
     >
-      {/* Atmosphere ambiante (or + rouge tres legers) */}
+      {/* Atmosphere ambiante (carmin tres leger) */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(216,184,124,0.4), transparent 60%), radial-gradient(circle at 80% 80%, rgba(168,130,63,0.25), transparent 65%)",
+            "radial-gradient(circle at 20% 20%, rgba(196,60,72,0.4), transparent 60%), radial-gradient(circle at 80% 80%, rgba(169,30,44,0.25), transparent 65%)",
         }}
       />
 
@@ -135,7 +135,7 @@ function SectionHeader() {
           viewport={{ once: true, amount: "some" }}
           transition={{ duration: 0.7, ease }}
         >
-          IV — La Manufacture
+          IV · La Manufacture
         </motion.p>
         <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)] leading-none">
           <motion.span
@@ -274,13 +274,13 @@ function Stage({
       className="relative aspect-16/10 w-full"
       style={{ containerType: "size" }}
     >
-      {/* Halo dore ambiant (projecteur) */}
+      {/* Halo carmin ambiant (projecteur) */}
       <motion.span
         aria-hidden
         className="pointer-events-none absolute -inset-12 md:-inset-20 blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(216,184,124,0.34), rgba(168,130,63,0.14) 45%, transparent 75%)",
+            "radial-gradient(ellipse at center, rgba(196,60,72,0.3), rgba(169,30,44,0.12) 45%, transparent 75%)",
           opacity: reduce ? 0.65 : ambientOpacity,
         }}
       />
@@ -445,14 +445,8 @@ function StatusBadge({
       : "bg-paper/90 text-foreground";
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-medium ${toneClasses} ${className}`}
+      className={`inline-flex items-center px-2.5 py-1 text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-medium ${toneClasses} ${className}`}
     >
-      {tone === "live" ? (
-        <span
-          aria-hidden
-          className="size-1 rounded-full bg-paper animate-pulse"
-        />
-      ) : null}
       {status.label}
     </span>
   );

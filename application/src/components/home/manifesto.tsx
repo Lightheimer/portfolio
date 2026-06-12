@@ -32,7 +32,7 @@ export function Manifesto() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.8, ease }}
           >
-            II — Manifeste
+            II · Manifeste
           </motion.p>
         </div>
 
@@ -67,7 +67,7 @@ export function Manifesto() {
             ))}
           </motion.h2>
 
-          <div className="mt-10 sm:mt-12 grid grid-cols-3 gap-4 sm:gap-8 max-w-3xl">
+          <div className="mt-10 sm:mt-14 grid grid-cols-3 divide-x divide-hairline border-t border-hairline pt-8 max-w-3xl">
             <Stat label="Annees" value={3} trailing="+" />
             <Stat label="Projets" value={6} />
             <Stat label="Stack" value={10} trailing="+" suffix="domaines" />
@@ -90,7 +90,7 @@ function Stat({
   trailing?: string;
 }) {
   return (
-    <div>
+    <div className="px-4 first:pl-0">
       <p className="display text-4xl sm:text-5xl md:text-6xl tnum">
         <AnimatedCounter value={value} pad={2} trailing={trailing} />
       </p>

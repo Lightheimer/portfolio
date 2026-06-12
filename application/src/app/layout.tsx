@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { fraunces, geist, geistMono } from "@/lib/fonts";
+import { cormorant, geist, geistMono } from "@/lib/fonts";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
 const SITE_URL = "https://application-nine-henna.vercel.app";
-const TITLE = "Junior Samuel KOUDJI — Software Engineer";
+const TITLE = "Junior Samuel KOUDJI · Software Engineer";
 const DESCRIPTION =
   "Software Engineer fullstack. Laravel, Next.js, Java, Shopify. Ex-stagiaire UNICEF Togo. Disponible en alternance a Paris des octobre 2026.";
 
@@ -109,7 +109,7 @@ export default function RootLayout({
     <html
       lang="fr"
       data-theme="light"
-      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <script

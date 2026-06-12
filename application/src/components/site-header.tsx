@@ -123,10 +123,6 @@ export function SiteHeader() {
             href="/#contact"
             className="group hidden md:inline-flex items-center gap-2.5 bg-ink text-paper px-4 lg:px-5 py-2.5 text-[11px] lg:text-[12px] font-medium tracking-[0.12em] uppercase hover:bg-rouge transition-colors duration-300"
           >
-            <span
-              aria-hidden
-              className="size-1.5 rounded-full bg-rouge group-hover:bg-paper transition-colors"
-            />
             <span className="hidden lg:inline">Echangeons</span>
             <span className="lg:hidden">Contact</span>
             <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
@@ -251,10 +247,7 @@ export function SiteHeader() {
               </nav>
 
               <div className="px-6 py-6 border-t border-hairline flex items-center justify-between">
-                <span className="eyebrow flex items-center gap-2">
-                  <span className="size-1.5 rounded-full bg-rouge" />
-                  Disponible
-                </span>
+                <span className="eyebrow text-rouge">Disponible</span>
                 <Link
                   href="/#contact"
                   onClick={() => setOpen(false)}

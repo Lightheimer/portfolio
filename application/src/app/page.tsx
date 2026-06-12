@@ -7,13 +7,11 @@ import { StackMarquee } from "@/components/home/stack-marquee";
 import { CapabilitiesList } from "@/components/home/capabilities-list";
 import { ClosingMark } from "@/components/home/closing-mark";
 import { PageIntro } from "@/components/effects/page-intro";
-import { ScrollHint } from "@/components/effects/scroll-hint";
 
 export default function Home() {
   return (
     <>
       <PageIntro />
-      <ScrollHint />
       <HeroDisplay />
       <Manifesto />
       <ExperienceSection />

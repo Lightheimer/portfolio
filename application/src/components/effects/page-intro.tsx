@@ -58,10 +58,6 @@ export function PageIntro() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
           >
             <span
-              aria-hidden
-              className="size-2 rounded-full bg-rouge"
-            />
-            <span
               className="font-display tracking-tight text-[clamp(1.5rem,4vw,2.5rem)]"
               style={{ letterSpacing: "-0.02em" }}
             >

@@ -1,20 +1,22 @@
-import { Fraunces } from "next/font/google";
+import { Cormorant } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 /**
- * Fraunces, serif optique old-style — la voix des livrets imprimes
- * (The Cut, SUZY, Serenity). Le portfolio devient l'extension numerique
- * exacte des editions papier : meme typo, meme ivoire, meme or.
- * Axe optique (opsz) variable : fin en petit corps, incisif en display.
+ * Cormorant, serif de haute couture a fort contraste.
+ * La voix display du portfolio : tranchante en grand corps,
+ * italiques dessinees. Ivoire + encre + carmin signature.
  */
-export const fraunces = Fraunces({
+export const cormorant = Cormorant({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  axes: ["opsz"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
 });
+
+/** Alias legacy : la route capture importe encore `fraunces`. */
+export const fraunces = cormorant;
 
 /**
  * Geist Sans, neutre technique (Vercel official).

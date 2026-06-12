@@ -2,17 +2,17 @@
 
 /* ----------------------------------------------------------------------------
  * Portfolio Junior Samuel KOUDJI
- * Direction artistique : Edition imprimee (livrets The Cut / SUZY / Serenity)
- * Ivoire chaud + encre + or maison. Fraunces optique en display.
- * Le portfolio est l'extension numerique exacte des editions papier.
+ * Direction artistique : Edition couture. Ivoire chaud + encre + carmin
+ * signature. Cormorant a fort contraste en display, une seule couleur
+ * d'accent sur toute la page.
  * -------------------------------------------------------------------------- */
 
 @theme {
-  /* Palette edition — heritee des livrets */
+  /* Palette edition */
   --color-paper: #f8f6f1;
   --color-ink: #12100d;
-  --color-gold: #a8823f;
-  --color-rouge: var(--color-gold); /* alias historique — l'accent maison est l'or */
+  --color-rouge: #a91e2c; /* carmin signature, accent unique */
+  --color-gold: var(--color-rouge); /* alias legacy */
   --color-bone: #e7e0d0;
   --color-paper-soft: #f1ece1;
 
@@ -21,7 +21,7 @@
   --color-foreground: var(--color-ink);
   --color-muted: #6f6a5f;
   --color-hairline: rgb(18 16 13 / 0.1);
-  --color-accent: var(--color-gold);
+  --color-accent: var(--color-rouge);
 
   /* Polices */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
@@ -30,7 +30,7 @@
   --font-display: var(--font-display), ui-serif, Georgia, Cambria, serif;
 
   --shadow-soft: 0 24px 48px rgb(18 16 13 / 0.06);
-  --shadow-rouge: 0 8px 32px rgb(168 130 63 / 0.22);
+  --shadow-rouge: 0 8px 32px rgb(169 30 44 / 0.2);
 }
 
 html {
@@ -51,7 +51,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold);
+  background: var(--color-rouge);
   color: var(--color-paper);
 }
 
@@ -64,8 +64,8 @@ body {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 380;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   line-height: 0.98;
   font-variant-ligatures: common-ligatures;
 }
@@ -73,7 +73,7 @@ body {
 .display em,
 .display .it {
   font-style: italic;
-  font-weight: 420;
+  font-weight: 500;
   line-height: 1.1;
   padding-bottom: 0.05em;
   display: inline-block;

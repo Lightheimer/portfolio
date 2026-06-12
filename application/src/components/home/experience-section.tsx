@@ -35,29 +35,29 @@ const ENTRIES: Entry[] = [
     index: "02",
     period: "2025",
     duration: "5 mois",
-    role: "Developpeur ICT4D — Stagiaire",
+    role: "Developpeur ICT4D, stagiaire",
     company: "UNICEF Togo",
     context: "Lome",
     body:
-      "Stage ICT4D au bureau pays. Deux livrables : GFA, plateforme de gestion du courrier de l'Assemblee Nationale Togolaise (en service), et une plateforme hospitaliere de suivi des operations terrain — projet de fin de cycle, soutenu devant jury, note 18/20 (demo locale, non deploye).",
-    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL", "Soutenance 18/20"],
+      "Stage ICT4D au bureau pays. Livrable principal : GFA, plateforme de gestion du courrier de l'Assemblee Nationale Togolaise, en service interne. Plus une plateforme hospitaliere de suivi des operations terrain (demo locale).",
+    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL"],
   },
   {
     index: "03",
     period: "2025",
     duration: "3 mois",
-    role: "Developpeur Fullstack — Stagiaire",
+    role: "Developpeur Fullstack, stagiaire",
     company: "ATANYS / CAMEG",
     context: "Lome",
     body:
-      "Developpement d'une plateforme web de gestion des commandes medicales pour la Centrale d'Achat des Medicaments Essentiels Generiques du Togo.",
-    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL"],
+      "Developpement d'une plateforme web de gestion des commandes medicales pour la Centrale d'Achat des Medicaments Essentiels Generiques du Togo. Projet de fin de cycle : application soutenue devant jury, note 18/20.",
+    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL", "Soutenance 18/20"],
   },
   {
     index: "04",
     period: "2024",
     duration: "2 mois",
-    role: "Developpeur Web — Stagiaire",
+    role: "Developpeur Web, stagiaire",
     company: "CEET",
     context: "Compagnie Energie Electrique du Togo",
     body:
@@ -90,7 +90,7 @@ export function ExperienceSection() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, ease }}
           >
-            III — Parcours
+            III · Parcours
           </motion.p>
         </div>
 
@@ -111,39 +111,29 @@ export function ExperienceSection() {
             ))}
           </h2>
 
-          <ol className="mt-12 sm:mt-16 md:mt-20 relative">
-            {/* Vertical rule */}
-            <span
-              aria-hidden
-              className="absolute left-0 md:left-[12%] top-2 bottom-2 w-px bg-hairline"
-            />
+          <ol className="mt-12 sm:mt-16 md:mt-20 border-t border-hairline">
             {ENTRIES.map((e, i) => (
               <motion.li
                 key={e.index}
-                className="relative pl-8 md:pl-[16%] pb-12 md:pb-16 last:pb-0"
+                className="border-b border-hairline py-10 md:py-12"
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: "some" }}
                 transition={{ duration: 0.8, delay: i * 0.08, ease }}
               >
-                {/* Marker */}
-                <span
-                  aria-hidden
-                  className="absolute -left-0.75 md:left-[calc(12%-3px)] top-2 size-1.5 rounded-full bg-rouge ring-4 ring-paper"
-                />
-
                 <div className="grid grid-cols-12 gap-4 md:gap-8 items-baseline">
                   <div className="col-span-12 md:col-span-3">
-                    <p className="eyebrow tnum">
-                      N. {e.index} / {e.period}
+                    <p className="font-display italic text-3xl md:text-4xl text-rouge/80 tnum">
+                      {e.index}
                     </p>
+                    <p className="eyebrow mt-3 tnum">{e.period}</p>
                     <p className="text-[12px] text-muted mt-1 tnum">
                       {e.duration}
                     </p>
                   </div>
 
                   <div className="col-span-12 md:col-span-9">
-                    <h3 className="display text-2xl md:text-3xl">
+                    <h3 className="display text-3xl md:text-4xl">
                       {e.company}
                       <span className="text-rouge">.</span>
                     </h3>

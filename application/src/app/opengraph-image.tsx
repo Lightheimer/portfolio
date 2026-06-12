@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Junior Samuel KOUDJI — Software Engineer";
+export const alt = "Junior Samuel KOUDJI · Software Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -39,10 +39,9 @@ export default async function OgImage() {
           <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <span
               style={{
-                width: 8,
-                height: 8,
-                borderRadius: 999,
-                background: "#a8823f",
+                width: 28,
+                height: 2,
+                background: "#a91e2c",
                 display: "block",
               }}
             />
@@ -61,7 +60,7 @@ export default async function OgImage() {
               fontFamily: "monospace",
             }}
           >
-            Nº I — Software Engineer
+            Nº I · Software Engineer
           </div>
           <div
             style={{
@@ -76,7 +75,7 @@ export default async function OgImage() {
             <span>Junior Samuel</span>
             <span style={{ fontStyle: "italic" }}>
               Koudji
-              <span style={{ color: "#a8823f" }}>.</span>
+              <span style={{ color: "#a91e2c" }}>.</span>
             </span>
           </div>
           <div
@@ -112,8 +111,8 @@ export default async function OgImage() {
           <div
             style={{
               padding: "12px 20px",
-              border: "1px solid #a8823f",
-              color: "#a8823f",
+              border: "1px solid #a91e2c",
+              color: "#a91e2c",
               fontSize: 16,
               fontWeight: 600,
               letterSpacing: 3,

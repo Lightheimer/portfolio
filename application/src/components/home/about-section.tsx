@@ -18,9 +18,9 @@ export function AboutSection() {
   ];
 
   const paras = [
-    "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system \u2014 chaque projet m'a forme sur le terrain.",
+    "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system : chaque projet m'a forme sur le terrain.",
     "Ne au Togo, forme sur les contraintes du terrain ouest-africain : reseau intermittent, mobile money, offline-first. Le detail compte quand l'internet ne suit pas.",
-    "Trois produits en ligne (PIKARRE Apart, Vanelys, CBC en finition), une plateforme institutionnelle livree pour l'Assemblee Nationale Togolaise pendant le stage UNICEF, plus une boutique POS en demo. Tout est concu pour tenir des annees \u2014 pas un trimestre.",
+    "Trois produits en ligne (PIKARRE Apart, Vanelys, CBC en finition), une plateforme institutionnelle livree pour l'Assemblee Nationale Togolaise, et l'application de gestion des commandes medicales de la CAMEG, soutenue devant jury avec la note 18/20. Tout est concu pour tenir des annees, pas un trimestre.",
     "Aujourd'hui : disponible a Paris des octobre 2026 pour rejoindre une equipe produit ambitieuse en alternance. Lome. Paris.",
   ];
 
@@ -39,7 +39,7 @@ export function AboutSection() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, ease }}
           >
-            V — À propos
+            V · À propos
           </motion.p>
         </div>
 
@@ -162,18 +162,9 @@ export function AboutSection() {
             <div>
               <p className="eyebrow mb-3">Mission visée</p>
               <ul className="space-y-1.5 text-[14px]">
-                <li className="flex items-center gap-2">
-                  <span className="size-1 rounded-full bg-rouge" />
-                  Software / Product engineer
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="size-1 rounded-full bg-rouge" />
-                  Startups, agences, scale-ups
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="size-1 rounded-full bg-rouge" />
-                  Remote · Lomé · Paris
-                </li>
+                <li>Software / Product engineer</li>
+                <li>Startups, agences, scale-ups</li>
+                <li>Remote · Lomé · Paris</li>
               </ul>
             </div>
           </motion.div>
@@ -208,13 +199,11 @@ export function AboutSection() {
           </motion.div>
 
           <div className="text-sm md:text-right">
-            <p className="eyebrow mb-2 flex md:justify-end items-center gap-2">
-              <span className="size-1.5 rounded-full bg-rouge" /> Disponible
-            </p>
+            <p className="eyebrow mb-2 text-rouge">Disponible</p>
             <p className="leading-relaxed text-foreground/80">
               Paris des octobre 2026.
               <br />
-              En recherche d&apos;alternance — Master
+              En recherche d&apos;alternance, Master
               <br />
               Developpeur Fullstack.
               <br />
