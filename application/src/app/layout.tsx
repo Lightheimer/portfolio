@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { playfair, geist, geistMono } from "@/lib/fonts";
+import { fraunces, geist, geistMono } from "@/lib/fonts";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 
@@ -109,7 +109,7 @@ export default function RootLayout({
     <html
       lang="fr"
       data-theme="light"
-      className={`${playfair.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <script

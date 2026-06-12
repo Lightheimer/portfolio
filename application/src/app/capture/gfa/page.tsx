@@ -1,5 +1,5 @@
 /* Capture-only route for GFA project card visual. Not linked anywhere. */
-import { playfair } from "@/lib/fonts";
+import { fraunces } from "@/lib/fonts";
 
 const W = 1200;
 const H = 780;
@@ -7,7 +7,7 @@ const H = 780;
 export default function GfaCapturePage() {
   return (
     <div
-      className={playfair.variable}
+      className={fraunces.variable}
       style={{
         position: "fixed",
         inset: 0,
@@ -46,7 +46,7 @@ export default function GfaCapturePage() {
             position: "absolute",
             inset: 0,
             background:
-              "radial-gradient(ellipse at 28% 38%, rgba(200,16,46,0.11), transparent 55%), radial-gradient(ellipse at 90% 95%, rgba(200,16,46,0.06), transparent 50%)",
+              "radial-gradient(ellipse at 28% 38%, rgba(168,130,63,0.13), transparent 55%), radial-gradient(ellipse at 90% 95%, rgba(168,130,63,0.07), transparent 50%)",
           }}
         />
         {/* Grain */}
@@ -71,8 +71,8 @@ export default function GfaCapturePage() {
             transform: "translateY(-50%)",
             width: 5,
             height: 240,
-            background: "#C8102E",
-            boxShadow: "0 0 30px rgba(200,16,46,0.4)",
+            background: "#A8823F",
+            boxShadow: "0 0 30px rgba(168,130,63,0.4)",
           }}
         />
 
@@ -89,7 +89,7 @@ export default function GfaCapturePage() {
             lineHeight: 1,
             fontWeight: 600,
             color: "transparent",
-            WebkitTextStroke: "1px rgba(200,16,46,.30)",
+            WebkitTextStroke: "1px rgba(168,130,63,.34)",
             letterSpacing: "-0.08em",
           }}
         >
@@ -118,7 +118,7 @@ export default function GfaCapturePage() {
               width: 6,
               height: 6,
               borderRadius: "50%",
-              background: "#C8102E",
+              background: "#A8823F",
             }}
           />
           <span>Dossier  .  2026</span>
@@ -146,7 +146,7 @@ export default function GfaCapturePage() {
               display: "block",
               fontWeight: 600,
               letterSpacing: "0.42em",
-              color: "#C8102E",
+              color: "#A8823F",
             }}
           >
             Confidentiel
@@ -192,7 +192,7 @@ export default function GfaCapturePage() {
             style={{
               display: "block",
               fontStyle: "italic",
-              color: "#C8102E",
+              color: "#A8823F",
               fontSize: 92,
               marginTop: 14,
               marginLeft: 64,
@@ -253,7 +253,7 @@ export default function GfaCapturePage() {
             fontFamily: "var(--font-geist-mono), monospace",
           }}
         >
-          <span style={{ color: "#C8102E", fontSize: 8 }}>●</span>
+          <span style={{ color: "#A8823F", fontSize: 8 }}>●</span>
           <span>Junior Samuel Koudji</span>
           <span style={{ opacity: 0.4 }}>/</span>
           <span>Etude selectionnee</span>

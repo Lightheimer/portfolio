@@ -90,7 +90,7 @@ export function ExperienceSection() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, ease }}
           >
-            03 / Parcours
+            III — Parcours
           </motion.p>
         </div>
 

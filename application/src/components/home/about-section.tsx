@@ -39,7 +39,7 @@ export function AboutSection() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.7, ease }}
           >
-            05 / À propos
+            V — À propos
           </motion.p>
         </div>
 

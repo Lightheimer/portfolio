@@ -32,7 +32,7 @@ export function Manifesto() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.8, ease }}
           >
-            02 / Manifeste
+            II — Manifeste
           </motion.p>
         </div>
 

@@ -15,8 +15,8 @@ export default async function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#fafaf8",
-          color: "#0c0c0c",
+          background: "#f8f6f1",
+          color: "#12100d",
           padding: 64,
           fontFamily: "serif",
           position: "relative",
@@ -42,7 +42,7 @@ export default async function OgImage() {
                 width: 8,
                 height: 8,
                 borderRadius: 999,
-                background: "#c8102e",
+                background: "#a8823f",
                 display: "block",
               }}
             />
@@ -61,7 +61,7 @@ export default async function OgImage() {
               fontFamily: "monospace",
             }}
           >
-            N. 01 / Software Engineer
+            Nº I — Software Engineer
           </div>
           <div
             style={{
@@ -76,7 +76,7 @@ export default async function OgImage() {
             <span>Junior Samuel</span>
             <span style={{ fontStyle: "italic" }}>
               Koudji
-              <span style={{ color: "#c8102e" }}>.</span>
+              <span style={{ color: "#a8823f" }}>.</span>
             </span>
           </div>
           <div
@@ -112,8 +112,8 @@ export default async function OgImage() {
           <div
             style={{
               padding: "12px 20px",
-              border: "1px solid #c8102e",
-              color: "#c8102e",
+              border: "1px solid #a8823f",
+              color: "#a8823f",
               fontSize: 16,
               fontWeight: 600,
               letterSpacing: 3,

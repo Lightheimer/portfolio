@@ -74,7 +74,7 @@ export function HeroDisplay() {
         transition={{ duration: 0.9, delay: 0.1, ease }}
       >
         <p className="eyebrow col-span-6 sm:col-span-3">Portfolio. 2026.</p>
-        <p className="eyebrow col-span-6 sm:col-span-3 sm:text-center">N. 01</p>
+          <p className="eyebrow col-span-6 sm:col-span-3 sm:text-center">Nº I</p>
         <p className="hidden sm:block eyebrow col-span-3 text-center">
           Software engineer
         </p>

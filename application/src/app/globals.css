@@ -2,24 +2,26 @@
 
 /* ----------------------------------------------------------------------------
  * Portfolio Junior Samuel KOUDJI
- * Direction artistique : Cartier (palette ivory + ink + rouge Cartier)
- * Anti-slop : rotation hors Fraunces, accent unique, photos massives
+ * Direction artistique : Edition imprimee (livrets The Cut / SUZY / Serenity)
+ * Ivoire chaud + encre + or maison. Fraunces optique en display.
+ * Le portfolio est l'extension numerique exacte des editions papier.
  * -------------------------------------------------------------------------- */
 
 @theme {
-  /* Palette Cartier-inspired */
-  --color-paper: #fafaf8;
-  --color-ink: #0c0c0c;
-  --color-rouge: #c8102e;
-  --color-bone: #e8e4dc;
-  --color-paper-soft: #f3f1ec;
+  /* Palette edition — heritee des livrets */
+  --color-paper: #f8f6f1;
+  --color-ink: #12100d;
+  --color-gold: #a8823f;
+  --color-rouge: var(--color-gold); /* alias historique — l'accent maison est l'or */
+  --color-bone: #e7e0d0;
+  --color-paper-soft: #f1ece1;
 
   /* Semantiques light-first */
   --color-background: var(--color-paper);
   --color-foreground: var(--color-ink);
-  --color-muted: #6b6766;
-  --color-hairline: rgb(12 12 12 / 0.08);
-  --color-accent: var(--color-rouge);
+  --color-muted: #6f6a5f;
+  --color-hairline: rgb(18 16 13 / 0.1);
+  --color-accent: var(--color-gold);
 
   /* Polices */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system,
@@ -27,8 +29,8 @@
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
   --font-display: var(--font-display), ui-serif, Georgia, Cambria, serif;
 
-  --shadow-soft: 0 24px 48px rgb(12 12 12 / 0.06);
-  --shadow-rouge: 0 8px 32px rgb(200 16 46 / 0.18);
+  --shadow-soft: 0 24px 48px rgb(18 16 13 / 0.06);
+  --shadow-rouge: 0 8px 32px rgb(168 130 63 / 0.22);
 }
 
 html {
@@ -49,7 +51,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-rouge);
+  background: var(--color-gold);
   color: var(--color-paper);
 }
 
@@ -62,15 +64,16 @@ body {
 
 .display {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 0.96;
+  font-weight: 380;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  font-variant-ligatures: common-ligatures;
 }
 
 .display em,
 .display .it {
   font-style: italic;
-  font-weight: 500;
+  font-weight: 420;
   line-height: 1.1;
   padding-bottom: 0.05em;
   display: inline-block;
@@ -79,7 +82,7 @@ body {
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 500;
   color: var(--color-muted);

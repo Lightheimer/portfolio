@@ -103,7 +103,7 @@ export function SelectedWork() {
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(232,200,140,0.35), transparent 60%), radial-gradient(circle at 80% 80%, rgba(200,16,46,0.22), transparent 65%)",
+            "radial-gradient(circle at 20% 20%, rgba(216,184,124,0.4), transparent 60%), radial-gradient(circle at 80% 80%, rgba(168,130,63,0.25), transparent 65%)",
         }}
       />
 
@@ -135,7 +135,7 @@ function SectionHeader() {
           viewport={{ once: true, amount: "some" }}
           transition={{ duration: 0.7, ease }}
         >
-          04 / La Manufacture
+          IV — La Manufacture
         </motion.p>
         <h2 className="display text-[clamp(2.5rem,9vw,6.5rem)] leading-none">
           <motion.span
@@ -280,7 +280,7 @@ function Stage({
         className="pointer-events-none absolute -inset-12 md:-inset-20 blur-3xl"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(232,200,140,0.32), rgba(200,16,46,0.12) 45%, transparent 75%)",
+            "radial-gradient(ellipse at center, rgba(216,184,124,0.34), rgba(168,130,63,0.14) 45%, transparent 75%)",
           opacity: reduce ? 0.65 : ambientOpacity,
         }}
       />
