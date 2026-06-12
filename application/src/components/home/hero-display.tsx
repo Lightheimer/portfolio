@@ -92,7 +92,7 @@ export function HeroDisplay() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.85, ease }}
             >
-              Trois produits en ligne. Un seul fil conducteur :{" "}
+              Cinq produits en ligne. Un seul fil conducteur :{" "}
               <em className="font-display italic text-rouge">
                 la rigueur du detail
               </em>
@@ -105,7 +105,7 @@ export function HeroDisplay() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.85, delay: 1.0, ease }}
             >
-              <span className="inline-flex border border-rouge/50 text-rouge px-4 py-2 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-medium whitespace-nowrap">
+              <span className="inline-flex border border-rouge/50 text-rouge px-4 py-2 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-medium text-center">
                 Alternance · Paris · Octobre 2026
               </span>
               <Link

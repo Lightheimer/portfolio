@@ -33,14 +33,14 @@ const ENTRIES: Entry[] = [
   },
   {
     index: "02",
-    period: "2025",
-    duration: "5 mois",
-    role: "Developpeur ICT4D, stagiaire",
+    period: "2026 → Present",
+    duration: "Prolonge jusqu'en sept. 2026",
+    role: "Stagiaire ICT4D",
     company: "UNICEF Togo",
-    context: "Lome",
+    context: "Section Digital Impact . Lome",
     body:
-      "Stage ICT4D au bureau pays. Livrable principal : GFA, plateforme de gestion du courrier de l'Assemblee Nationale Togolaise, en service interne. Plus une plateforme hospitaliere de suivi des operations terrain (demo locale).",
-    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL"],
+      "Stage ICT4D au bureau pays. Developpement de GFA, plateforme de gestion du courrier de l'Assemblee Nationale Togolaise, en phase de finalisation apres demo validee par les parties prenantes. Configuration d'OpenCRVS pour le Togo, conception d'agents IA, support technique du bureau. Stage prolonge sur decision officielle, en reconnaissance de l'engagement et du professionnalisme.",
+    tags: ["Laravel", "Livewire", "OpenCRVS", "Agents IA", "ICT4D"],
   },
   {
     index: "03",
@@ -50,8 +50,8 @@ const ENTRIES: Entry[] = [
     company: "ATANYS / CAMEG",
     context: "Lome",
     body:
-      "Developpement d'une plateforme web de gestion des commandes medicales pour la Centrale d'Achat des Medicaments Essentiels Generiques du Togo. Projet de fin de cycle : application soutenue devant jury, note 18/20.",
-    tags: ["Laravel", "Livewire", "MySQL", "PostgreSQL", "Soutenance 18/20"],
+      "Developpement d'une plateforme web de gestion des commandes medicales pour la Centrale d'Achat des Medicaments Essentiels Generiques du Togo, une dizaine d'utilisateurs vises. Projet de fin de cycle : application soutenue devant jury, note 18/20, mention Tres Bien. Formation de l'equipe technique.",
+    tags: ["Laravel", "Livewire", "MySQL", "Soutenance 18/20"],
   },
   {
     index: "04",
@@ -61,7 +61,7 @@ const ENTRIES: Entry[] = [
     company: "CEET",
     context: "Compagnie Energie Electrique du Togo",
     body:
-      "Stage au departement informatique. Developpement d'une plateforme web de gestion interne. Architecture MVC avec Laravel et MySQL.",
+      "Stage au departement informatique. Developpement d'une application RH interne destinee a 15+ employes, service RH et direction. Architecture MVC avec Laravel et MySQL, formation des utilisateurs et documentation technique.",
     tags: ["Laravel", "MySQL", "MVC"],
   },
 ];

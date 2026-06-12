@@ -53,6 +53,16 @@ export function SiteFooter() {
                   LinkedIn
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/CV-Junior-Samuel-KOUDJI.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-rouge hover:text-foreground transition-colors"
+                >
+                  CV (PDF)
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

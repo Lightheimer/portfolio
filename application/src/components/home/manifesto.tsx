@@ -72,7 +72,7 @@ export function Manifesto() {
 
           <div className="mt-10 sm:mt-14 grid grid-cols-3 divide-x divide-hairline border-t border-hairline pt-8 max-w-3xl">
             <Stat label="Annees" value={3} trailing="+" />
-            <Stat label="Projets" value={6} />
+            <Stat label="Projets" value={8} />
             <Stat label="Stack" value={10} trailing="+" suffix="domaines" />
           </div>
         </div>

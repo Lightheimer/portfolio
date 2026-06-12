@@ -15,7 +15,8 @@ const NAV = [
   { href: "/#capacites", label: "Capacites" },
   { href: "/#a-propos", label: "A propos" },
   { href: "/#contact", label: "Contact" },
-];
+  { href: "/CV-Junior-Samuel-KOUDJI.pdf", label: "CV", external: true },
+] as { href: string; label: string; external?: boolean }[];
 
 export function SiteHeader() {
   const reduce = useReducedMotion();
@@ -70,7 +71,9 @@ export function SiteHeader() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="eyebrow hover:text-foreground transition-colors"
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className={`eyebrow transition-colors ${item.external ? "text-rouge hover:text-foreground" : "hover:text-foreground"}`}
                   >
                     {item.label}
                   </Link>
@@ -213,6 +216,8 @@ export function SiteHeader() {
                     >
                       <Link
                         href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
                         onClick={() => setOpen(false)}
                         className="group block py-3 border-b border-hairline display text-4xl"
                       >

@@ -20,8 +20,8 @@ export function AboutSection() {
   const paras = [
     "Trois ans a construire des produits qui survivent au lundi matin. Du stage en entreprise publique a l'UNICEF Togo, du backend Laravel au design system : chaque projet m'a forme sur le terrain.",
     "Ne au Togo, forme sur les contraintes du terrain ouest-africain : reseau intermittent, mobile money, offline-first. Le detail compte quand l'internet ne suit pas.",
-    "Trois produits en ligne (PIKARRE Apart, Vanelys, CBC en finition), une plateforme institutionnelle livree pour l'Assemblee Nationale Togolaise, et l'application de gestion des commandes medicales de la CAMEG, soutenue devant jury avec la note 18/20. Tout est concu pour tenir des annees, pas un trimestre.",
-    "Aujourd'hui : disponible a Paris des octobre 2026 pour rejoindre une equipe produit ambitieuse en alternance. Lome. Paris.",
+    "Des produits en ligne (The Cut, Suzy, Serenity, PIKARRE Apart), une plateforme en finalisation pour l'Assemblee Nationale Togolaise au sein de l'UNICEF, et l'application de gestion des commandes medicales de la CAMEG, soutenue devant jury avec la note 18/20, mention Tres Bien.",
+    "Stage UNICEF prolonge jusqu'en septembre 2026 sur decision officielle. Ensuite : Paris, des octobre 2026, pour rejoindre une equipe produit ambitieuse en alternance.",
   ];
 
   return (
