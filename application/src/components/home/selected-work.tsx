@@ -95,7 +95,7 @@ const PROJECTS: Project[] = [
     index: "06",
     title: "CBC",
     subtitle: "Catholic Basketball Club . Lome",
-    context: "Identite, app club, comptabilite transparente, mini-matchs, votes anonymes. 39 modeles de donnees, backend complet, front en finition.",
+    context: "Identite, app club, comptabilite transparente, mini-matchs, votes anonymes, fantasy. 39 modeles de donnees, backend complet, direction artistique photo.",
     year: "2026",
     stack: "Next.js 16 . Supabase . Prisma 7",
     status: { label: "En cours", tone: "wip" },
@@ -115,7 +115,19 @@ const PROJECTS: Project[] = [
     alt: "Vanelys, boutique e-commerce mode a Lome",
   },
   {
+    slug: "https://walletmind-theta.vercel.app",
     index: "08",
+    title: "WalletMind",
+    subtitle: "Assistant financier IA . FCFA",
+    context: "Friday, une coach financiere conversationnelle : comptes, enveloppes, epargne verrouillee, tontines, score financier. On lui parle, elle classe et conseille. Pensee pour l'Afrique de l'Ouest.",
+    year: "2026",
+    stack: "Next.js 16 . IA conversationnelle . PostgreSQL",
+    status: { label: "En ligne", tone: "live" },
+    image: "/work/walletmind.jpg",
+    alt: "WalletMind, Friday veille sur ton argent, assistant financier en FCFA",
+  },
+  {
+    index: "09",
     title: "Marlone",
     subtitle: "Atelier mode . Boutique + caisse",
     context: "POS + e-commerce, gestion stock multi-variantes. Demo locale (Laravel + MySQL), non deploye publiquement.",
@@ -181,7 +193,7 @@ function SectionHeader() {
             viewport={{ once: true, amount: "some" }}
             transition={{ duration: 0.9, ease }}
           >
-            Huit projets.
+            Neuf projets.
           </motion.span>
           <motion.span
             className="block italic text-paper/75"
