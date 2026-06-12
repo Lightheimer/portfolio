@@ -10,11 +10,11 @@ export function Manifesto() {
   const reduce = useReducedMotion();
   const ease = [0.22, 1, 0.36, 1] as const;
 
-  const lines = [
-    "Construire des produits qui tiennent",
-    "des annees, pas un trimestre.",
-    "Le code, le design, la performance,",
-    "la maintenance: un seul artisan.",
+  const lines: { text: string; em?: string }[] = [
+    { text: "Construire des produits qui tiennent" },
+    { text: "des annees, pas un trimestre." },
+    { text: "Le code, le design, la performance," },
+    { text: "la maintenance: ", em: "un seul artisan." },
   ];
 
   return (
@@ -61,7 +61,10 @@ export function Manifesto() {
                   }
                   transition={{ duration: 1.1, delay: 0.15 + i * 0.1, ease }}
                 >
-                  {line}
+                  {line.text}
+                  {line.em ? (
+                    <em className="text-rouge">{line.em}</em>
+                  ) : null}
                 </motion.span>
               </span>
             ))}

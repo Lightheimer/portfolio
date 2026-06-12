@@ -115,7 +115,7 @@ export function ExperienceSection() {
             {ENTRIES.map((e, i) => (
               <motion.li
                 key={e.index}
-                className="border-b border-hairline py-10 md:py-12"
+                className="group border-b border-hairline py-10 md:py-12 transition-colors duration-500 hover:bg-paper-soft md:-mx-6 md:px-6"
                 initial={reduce ? false : { opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: "some" }}
@@ -123,7 +123,7 @@ export function ExperienceSection() {
               >
                 <div className="grid grid-cols-12 gap-4 md:gap-8 items-baseline">
                   <div className="col-span-12 md:col-span-3">
-                    <p className="font-display italic text-3xl md:text-4xl text-rouge/80 tnum">
+                    <p className="font-display italic text-3xl md:text-4xl text-rouge/70 tnum transition-colors duration-500 group-hover:text-rouge">
                       {e.index}
                     </p>
                     <p className="eyebrow mt-3 tnum">{e.period}</p>
@@ -133,7 +133,7 @@ export function ExperienceSection() {
                   </div>
 
                   <div className="col-span-12 md:col-span-9">
-                    <h3 className="display text-3xl md:text-4xl">
+                    <h3 className="display text-3xl md:text-4xl transition-transform duration-500 md:group-hover:translate-x-2">
                       {e.company}
                       <span className="text-rouge">.</span>
                     </h3>

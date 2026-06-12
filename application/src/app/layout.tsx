@@ -3,6 +3,7 @@ import "./globals.css";
 import { cormorant, geist, geistMono } from "@/lib/fonts";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ReadingProgress } from "@/components/effects/reading-progress";
 
 const SITE_URL = "https://application-nine-henna.vercel.app";
 const TITLE = "Junior Samuel KOUDJI · Software Engineer";
@@ -116,6 +117,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSONLD) }}
         />
+        <ReadingProgress />
         <SiteHeader />
         <main className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />

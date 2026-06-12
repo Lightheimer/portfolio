@@ -43,10 +43,10 @@ export function StackMarquee() {
         {list.map((label, i) => (
           <span
             key={`${label}-${i}`}
-            className="flex items-center gap-10 px-6 font-display text-[clamp(1.25rem,3vw,2.25rem)] tracking-tight whitespace-nowrap"
+            className={`flex items-center gap-10 px-6 font-display text-[clamp(1.25rem,3vw,2.25rem)] tracking-tight whitespace-nowrap ${i % 2 === 1 ? "italic text-foreground/70" : ""}`}
           >
             <span>{label}</span>
-            <span className="text-rouge text-sm">●</span>
+            <span aria-hidden className="crop-mark relative shrink-0" />
           </span>
         ))}
       </div>

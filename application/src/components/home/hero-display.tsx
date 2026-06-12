@@ -30,11 +30,13 @@ export function HeroDisplay() {
     >
       {/* Folio */}
       <motion.div
-        className="grid grid-cols-12 gap-6 pb-6 border-b border-hairline"
+        className="relative grid grid-cols-12 gap-6 pb-6 border-b border-hairline"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease }}
       >
+        <span aria-hidden className="crop-mark -top-1 -left-5 hidden lg:block" />
+        <span aria-hidden className="crop-mark -top-1 -right-5 hidden lg:block" />
         <p className="eyebrow col-span-6 sm:col-span-3">Portfolio. 2026.</p>
         <p className="eyebrow col-span-6 sm:col-span-3 sm:text-center">Nº I</p>
         <p className="hidden sm:block eyebrow col-span-3 text-center">
@@ -45,7 +47,9 @@ export function HeroDisplay() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-12 gap-x-6 gap-y-12 pt-10 sm:pt-16 pb-16 md:pb-28">
+      <div className="relative grid grid-cols-12 gap-x-6 gap-y-12 pt-10 sm:pt-16 pb-16 md:pb-28">
+        <span aria-hidden className="crop-mark bottom-6 -left-5 hidden lg:block" />
+        <span aria-hidden className="crop-mark bottom-6 -right-5 hidden lg:block" />
         {/* Nom massif */}
         <div className="col-span-12 md:col-span-8 flex flex-col justify-between">
           <motion.h1
@@ -124,9 +128,13 @@ export function HeroDisplay() {
         <div className="col-span-12 md:col-span-4 flex flex-col gap-8">
           <motion.figure
             className="relative"
-            initial={reduce ? false : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.3, delay: 0.45, ease }}
+            initial={
+              reduce
+                ? false
+                : { opacity: 0, clipPath: "inset(100% 0% 0% 0%)" }
+            }
+            animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
+            transition={{ duration: 1.4, delay: 0.5, ease }}
           >
             <div className="relative aspect-3/4 w-full max-w-sm md:max-w-none overflow-hidden bg-ink">
               <Image
